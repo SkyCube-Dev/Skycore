@@ -1,0 +1,105 @@
+package dev.jackwith.skyCoreV2.features.upgrades.listeners;
+
+import dev.jackwith.skyCoreV2.SkyCore;
+import dev.jackwith.skyCoreV2.features.upgrades.gui.UpgradesHolder;
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+
+import java.util.UUID;
+
+public class UpgradeListener implements Listener {
+
+    private final SkyCore plugin;
+
+    public UpgradeListener(SkyCore plugin) {
+        this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onClick(InventoryClickEvent e) {
+        if (!(e.getWhoClicked() instanceof Player player)) return;
+
+        if (!(e.getInventory().getHolder() instanceof UpgradesHolder holder)) return;
+
+        e.setCancelled(true);
+        if (e.getCurrentItem() == null) return;
+
+        UUID ownerUuid = holder.getOwnerUuid();
+
+        int currentLevel = plugin.getUpgradeDB().getLevel(ownerUuid);
+        long timeLeft = plugin.getUpgradeDB().getUpgradingUntil(ownerUuid);
+        long now = System.currentTimeMillis();
+
+        ConfigurationSection levelSection = plugin.getUpgradesConfig().getConfigurationSection("upgrades." + currentLevel);
+
+        if (timeLeft > now) {
+            int creditsRequired = levelSection.getInt("credits");
+            double playerCredits = plugin.getPpAPI().look(player.getUniqueId());
+
+            if (playerCredits >= creditsRequired) {
+                plugin.getPpAPI().take(player.getUniqueId(), creditsRequired);
+
+                int nextLevel = currentLevel + 1;
+                ConfigurationSection nextLevelSection = plugin.getUpgradesConfig()
+                        .getConfigurationSection("upgrades." + nextLevel);
+
+                if (nextLevelSection == null) return;
+
+                plugin.getUpgradeDB().setLevel(ownerUuid, nextLevel);
+                plugin.getUpgradeDB().setUpgradingUntil(ownerUuid, 0);
+
+                int newSize = nextLevelSection.getInt("size");
+
+                plugin.updateIslandSize(ownerUuid.toString(), newSize, player);
+
+                player.sendMessage("§7(/upgrades) ♦ §fUpgrade instantly completed using §b"
+                        + creditsRequired + " credits§f!");
+
+            } else {
+                player.sendMessage("§7(/upgrades) ♦ §cThis island is already being upgraded!");
+            }
+            return;
+        }
+
+        int nextLevel = currentLevel + 1;
+        ConfigurationSection nextLevelSection = plugin.getUpgradesConfig().getConfigurationSection("upgrades." + nextLevel);
+
+        if (nextLevelSection == null) return;
+
+        if (e.getRawSlot() != nextLevelSection.getInt("slot")) return;
+
+        double price = nextLevelSection.getDouble("price");
+        int timeSeconds = nextLevelSection.getInt("time", 60);
+        int requiredExp = nextLevelSection.getInt("exp");
+
+        if (player.getLevel() < requiredExp) {
+            player.sendMessage("§cYou need level " + requiredExp + " to start this upgrade!");
+            return;
+        }
+
+        if (!plugin.getEconomy().has(player, price)) {
+            player.sendMessage("§cYou don't have enough money! Cost: §e$" + String.format("%,.0f", price));
+            return;
+        }
+
+        plugin.getEconomy().withdrawPlayer(player, price);
+        long finishTime = now + (timeSeconds * 1000L);
+
+        plugin.getUpgradeDB().setUpgradingUntil(ownerUuid, finishTime);
+
+        player.sendMessage("§a§lUPGRADE §8» §fYou started the island upgrade! Completion in §b" + timeSeconds + "s§f.");
+
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            plugin.getUpgradeDB().setLevel(ownerUuid, nextLevel);
+            plugin.getUpgradeDB().setUpgradingUntil(ownerUuid, 0);
+
+            int newSize = nextLevelSection.getInt("size");
+
+            plugin.updateIslandSize(ownerUuid.toString(), newSize, player);
+        }, 20L * timeSeconds);
+    }
+}

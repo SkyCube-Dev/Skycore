@@ -1,0 +1,406 @@
+pets:
+  rusty:
+    boost: 30
+    rarity: "common"
+    name: "<#b5400e><bold>RUSTY"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191185
+
+    model:
+      modelname: "cubee_slingshot"
+  boomer:
+    boost: 32
+    rarity: "common"
+    name: "<#fc6a00><bold>BOOMER"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191182
+
+    model:
+      modelname: "cubee_cannon"
+  patch:
+    boost: 34
+    rarity: "common"
+    name: "<#5ead3b><bold>PATCH"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191003
+
+    model:
+      modelname: "cubee_grass"
+  rocky:
+    boost: 36
+    rarity: "common"
+    name: "<#6d6d6d><bold>ROCKY"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191005
+
+    model:
+      modelname: "cubee_stone"
+  bones:
+    boost: 38
+    rarity: "common"
+    name: "<#e5ded3><bold>BONES"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191004
+
+    model:
+      modelname: "cubee_skeleton"
+  bubbles:
+    boost: 40
+    rarity: "common"
+    name: "<#4CC7FC><bold>BUBBLES"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191006
+
+    model:
+      modelname: "cubee_water"
+  flames:
+    boost: 42
+    rarity: "common"
+    name: "<#fc2d2d><bold>FLAMES"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191007
+
+    model:
+      modelname: "cubee_fire"
+  halo:
+    boost: 44
+    rarity: "common"
+    name: "<#fcdd65><bold>HALO"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191001
+
+    model:
+      modelname: "cubee_good"
+  blast:
+    boost: 46
+    rarity: "common"
+    name: "<#fc3b00><bold>BLAST"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191008
+
+    model:
+      modelname: "cubee_tnt"
+  lucifer:
+    boost: 50
+    rarity: "common"
+    name: "<#890000><bold>LUCIFER"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191002
+
+    model:
+      modelname: "cubee_evil"
+  gangsta:
+    boost: 55
+    rarity: "rare"
+    name: "<#977bfc><bold>GANGSTA"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191186
+
+    model:
+      modelname: "cubee_swag_pillager"
+  ghosty:
+    boost: 60
+    rarity: "rare"
+    name: "<#b6e5fc><bold>GHOSTY"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191180
+
+    model:
+      modelname: "cubee_baby_ghast"
+  skipper:
+    boost: 65
+    rarity: "rare"
+    name: "<#2cfc7d><bold>SKIPPER"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191183
+
+    model:
+      modelname: "cubee_hoody_fox"
+  sparky:
+    boost: 70
+    rarity: "rare"
+    name: "<#fcd400><bold>SPARKY"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191181
+
+    model:
+      modelname: "cubee_bombardier_creeper"
+  waffles:
+    boost: 75
+    rarity: "rare"
+    name: "<#cf985a><bold>WAFFLES"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191184
+
+    model:
+      modelname: "cubee_llama"
+  forestkeeper:
+    boost: 80
+    rarity: "leg"
+    name: "<b><gradient:#48fc80:#b3f596>FOREST KEEPER</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191158
+
+    model:
+      modelname: "cubee_forest_keeper"
+  wishingteddy:
+    boost: 82
+    rarity: "leg"
+    name: "<b><gradient:#a948fc:#e496f5>WISHING TEDDY</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191163
+
+    model:
+      modelname: "cubee_wishing_teddy"
+  cornelius:
+    boost: 82
+    rarity: "leg"
+    name: "<b><gradient:#fccb54:#f3b133>CORNELIUS</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191315
+
+    model:
+      modelname: "cubee_candy_corn_crab"
+  sprinkles:
+    boost: 84
+    rarity: "leg"
+    name: "<b><gradient:#fc6dc5:#fca1ed>SPRINKLES</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191318
+
+    model:
+      modelname: "cubee_donut"
+  chomps:
+    boost: 86
+    rarity: "leg"
+    name: "<b><gradient:#59d4fc:#4a9efc>CHOMPS</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191316
+
+    model:
+      modelname: "cubee_croissant_shark"
+  gumbo:
+    boost: 88
+    rarity: "leg"
+    name: "<b><gradient:#fc4268:#fc4a7d>GUMBO</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191319
+
+    model:
+      modelname: "cubee_gummy_bear"
+  macaroon:
+    boost: 90
+    rarity: "leg"
+    name: "<b><gradient:#00fc96:#4afcbc>MACAROON</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191320
+
+    model:
+      modelname: "cubee_macarons"
+  brownie:
+    boost: 92
+    rarity: "leg"
+    name: "<b><gradient:#8a5944:#c6a78b>BROWNIE</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191322
+
+    model:
+      modelname: "cubee_creamie_cookie_boar"
+  cupcake:
+    boost: 94
+    rarity: "leg"
+    name: "<b><gradient:#fae4c5:#c6a78b>CUPCAKE</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191317
+
+    model:
+      modelname: "cubee_cupcake_snake"
+  mello:
+    boost: 96
+    rarity: "leg"
+    name: "<b><gradient:#fcf3e6:#e9e9e9>MELLO</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191321
+
+    model:
+      modelname: "cubee_marshmellow"
+  joystick:
+    boost: 98
+    rarity: "leg"
+    name: "<b><gradient:#fc5151:#fc3636>JOYSTICK</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191080
+
+    model:
+      modelname: "cubee_joystick"
+  arcade:
+    boost: 100
+    rarity: "leg"
+    name: "<b><gradient:#d051fc:#c569fc>ARCADE</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191076
+
+    model:
+      modelname: "cubee_arcade_machine"
+  pacman:
+    boost: 105
+    rarity: "mythic"
+    name: "<b><gradient:#fce300:#fcc100>PACMAN</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191082
+
+    model:
+      modelname: "cubee_panman"
+  shroom:
+    boost: 115
+    rarity: "mythic"
+    name: "<b><gradient:#fc003d:#fcf9ee>SHROOM</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191078
+
+    model:
+      modelname: "cubee_giant_shroom"
+  imposter:
+    boost: 125
+    rarity: "mythic"
+    name: "<b><gradient:#fc0000:#fc1d41>IMPOSTER</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191079
+
+    model:
+      modelname: "cubee_impostor"
+  kirby:
+    boost: 135
+    rarity: "mythic"
+    name: "<b><gradient:#fc85ce:#fc69c3>KIRBY</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191081
+
+    model:
+      modelname: "cubee_pinky_bloat"
+  pickachu:
+    boost: 145
+    rarity: "mythic"
+    name: "<b><gradient:#fce300:#fcb500>PICKACHU</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191083
+
+    model:
+      modelname: "cubee_voltage_mouse"
+  drwiggles:
+    boost: 200
+    rarity: "exotic"
+    name: "<b><gradient:#fc5c5d:#fcb95d>DR.</gradient><gradient:#fcb95d:#e0d85e> </gradient><gradient:#e0d85e:#72f761>WIG</gradient><gradient:#72f761:#54f881>G</gradient><gradient:#54f881:#4edeff>LES</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191077
+
+    model:
+      modelname: "cubee_pixel_centipede"
+  dragon:
+    boost: 250
+    rarity: "exotic"
+    name: "Ender Dragon"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191094
+
+    model:
+      modelname: "cubee_ender_dragon"
+
+  wither:
+    boost: 250
+    rarity: "exotic"
+    name: "The Wither"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191096
+
+    model:
+      modelname: "cubee_the_wither"
+
+  warden:
+    boost: 250
+    rarity: "exotic"
+    name: "Warden"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191097
+
+    model:
+      modelname: "cubee_warden"
+
+rarities:
+  common: "<italic:false><#4FFC8B><obf>tt</obf><u>ᴄᴏᴍᴍᴏɴ ɪᴛᴇᴍ ʀᴀʀɪᴛʏ</u><obf>tt</obf>"
+  rare: "<italic:false><#5feee8><obf>kk<reset><italic:false><u><gradient:#5feee8:#08c2fb>ʀᴀʀᴇ ᴘᴇᴛ ʀᴀʀɪᴛʏ</gradient><reset><italic:false><#5feee8><obf>kk"
+  leg: "<italic:false><red><obf>kk<reset><italic:false><u><gradient:#fc5c5d:#fcb95d>ʟᴇɢᴇɴ</gradient><gradient:#fcb95d:#e0d85e>ᴅᴀʀ</gradient><gradient:#e0d85e:#72f761>ʏ ᴘᴇ</gradient><gradient:#72f761:#54f881>ᴛ </gradient><gradient:#54f881:#4edeff>ʀᴀʀɪᴛʏ</gradient></u><red><obf>kk<reset><u>"
+  mythic: "<italic:false><light_purple><obf>kk<reset><italic:false><u><gradient:#757dfc:#fcabd5>ᴍʏᴛʜɪᴄᴀʟ ᴘᴇᴛ ʀᴀʀɪᴛʏ</gradient></u><light_purple><obf>kk"
+  exotic: "<italic:false><dark_red><obf>kk<reset><italic:false><u><gradient:#860000:#eb0000>ᴇxᴏᴛɪᴄ ᴘᴇᴛ ʀᴀʀɪᴛʏ</gradient></u><dark_red><obf>kk"

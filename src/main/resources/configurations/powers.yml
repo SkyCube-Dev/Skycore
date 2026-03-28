@@ -1,0 +1,112 @@
+powers:
+
+  minion:
+    layout: 12
+    price: 700
+    name: "<i:false><gradient:#FFC46D:#EDC88D><b>MINION POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#EDC88D:#EDC88D><b>| </b></gradient>"
+      line1: "<i:false><gradient:#F4FC6D:#B4CEDF>Shrink your player</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#F4FC6D>to a smaller size </gradient><gradient:#B4CEDF:#B4CEDF>(<red>↓</red>50%)</gradient>"
+
+    item:
+      material: "VILLAGER_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  mario:
+    layout: 13
+    price: 700
+    name: "<i:false><gradient:#FC2A2A:#FC3838><b>MARIO POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#FC3838:#FC3838><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you an </gradient><gradient:#FC3838:#FC3838>infinite</gradient>"
+      line2: "<i:false><gradient:#FC3838:#FC3838>mario-style </gradient><gradient:#B4CEDF:#B4CEDF>jump boost </gradient><gradient:#54FC54:#54FC54>↑</gradient>"
+
+    item:
+      material: "MOOSHROOM_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  hulk:
+    layout: 14
+    price: 700
+    name: "<i:false><gradient:#ACE25B:#B7F25F><b>HULK POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#ACE25B:#ACE25B><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>When using a </gradient><gradient:#ACE25B:#ACE25B>pickaxe</gradient> <gradient:#B4CEDF:#B4CEDF>it</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>will </gradient><gradient:#ACE25B:#ACE25B>mine blocks </gradient><gradient:#B4CEDF:#B4CEDF>by 3x3 </gradient><gradient:#ACE25B:#ACE25B>⛏</gradient>"
+
+    item:
+      material: "ZOMBIE_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  frozone:
+    layout: 15
+    price: 700
+    name: "<i:false><gradient:#87F7FC:#BEEDFC><b>FROZONE POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#87F7FC:#87F7FC><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you the </gradient><gradient:#87F7FC:#87F7FC>ability</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to </gradient><gradient:#87F7FC:#87F7FC>walk </gradient><gradient:#B4CEDF:#B4CEDF>on water </gradient><gradient:#87F7FC:#87F7FC>🌊👣</gradient>"
+
+    item:
+      material: "DOLPHIN_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  aquaman:
+    layout: 16
+    price: 700
+    name: "<i:false><gradient:#E2C45B:#FCF69D><b>AQUAMAN POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#E2C45B:#E2C45B><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you </gradient><gradient:#E2C45B:#E2C45B>infinite</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>water </gradient><gradient:#E2C45B:#E2C45B>breathing </gradient><gradient:#B4CEDF:#B4CEDF>ability </gradient><gradient:#E2C45B:#E2C45B>Ψ</gradient>"
+
+    item:
+      material: "DROWNED_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  superman:
+    layout: 22
+    price: 700
+    name: "<i:false><gradient:#0097F4:#87CFFC><b>SUPERMAN POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#0097F4:#0097F4><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you the </gradient><gradient:#0097F4:#0097F4>ability</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to have </gradient><gradient:#0097F4:#0097F4>infinite </gradient><gradient:#B4CEDF:#B4CEDF>fly </gradient><gradient:#0097F4:#0097F4>🚀</gradient>"
+
+    item:
+      material: "CREAKING_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  inferno:
+    layout: 23
+    price: 700
+    name: "<i:false><gradient:#FCBB73:#FC4040><b>INFERNO POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#FC934D:#FC934D><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you the </gradient><gradient:#FC934D:#FC934D>ability</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to </gradient><gradient:#FC934D:#FC934D>walk </gradient><gradient:#B4CEDF:#B4CEDF>on lava </gradient><gradient:#FC934D:#FC934D>🔥👣</gradient>"
+
+    item:
+      material: "BLAZE_SPAWN_EGG"
+      custommodeldata: 7191095
+
+
+  spiderman:
+    layout: 24
+    price: 700
+    name: "<i:false><gradient:#FC6161:#FC2323><b>SPIDERMAN POWER</b></gradient>"
+    lore:
+      bar: "<i:false><gradient:#FC6161:#FC6161><b>| </b></gradient>"
+      line1: "<i:false><gradient:#B4CEDF:#B4CEDF>Gives you the </gradient><gradient:#FC6161:#FC6161>ability</gradient>"
+      line2: "<i:false><gradient:#B4CEDF:#B4CEDF>of </gradient><gradient:#FC6161:#FC6161>no fall </gradient><gradient:#B4CEDF:#B4CEDF>damage </gradient><gradient:#FC6161:#FC6161>🚫</gradient>"
+
+    item:
+      material: "STRIDER_SPAWN_EGG"
+      custommodeldata: 7191095

@@ -1,0 +1,182 @@
+buttons:
+
+  upgrade_button:
+    material: YELLOW_STAINED_GLASS_PANE
+    name: "<gold>Level <level>"
+
+    lore:
+      - "<dark_gray>ʙᴏʀᴅᴇʀ ᴜᴘɢʀᴀᴅᴇ"
+      -  ""
+      - "<yellow><b>| <reset><gray>Border Size: <#6FC3EB><size>x<size>"
+      - "<yellow><b>| <reset><gray>Price: <dark_green>$<green><price>"
+      - "<yellow><b>| <reset><gray>EXP: <yellow><exp> 🧪"
+      - ""
+      - "<reset><gray><b>───────────"
+      - "<reset><red>UPGRADE TIME: <red>1m"
+      - "<reset><gray><b>───────────"
+      - ""
+      - "<green>→ Click to Upgrade"
+
+  prevs_upgrade_button:
+    material: RED_STAINED_GLASS_PANE
+    name: "<gold>Level <level>"
+
+    lore:
+      - "<dark_gray>ʙᴏʀᴅᴇʀ ᴜᴘɢʀᴀᴅᴇ"
+      - ""
+      - "<red><u>ʀᴇǫᴜɪʀᴇs ᴘʀᴇᴠɪᴏᴜs ᴜᴘɢʀᴀᴅᴇ"
+      - ""
+      - "<yellow><b>| <reset><gray>Border Size: <#6FC3EB><size>x<size>"
+      - "<yellow><b>| <reset><gray>Price: <dark_green>$<green><price>"
+      - "<yellow><b>| <reset><gray>EXP: <yellow><exp> 🧪"
+      - ""
+      - "<gray><b>───────────"
+      - "<reset><red>UPGRADE TIME: <red><time>"
+      - "<gray><b>───────────"
+      - ""
+      - "<green>→ Click to Upgrade"
+
+  upgrading_button:
+    material: CLOCK
+    name: "<yellow>Upgrading..."
+
+    lore:
+      - "<dark_gray>ᴜᴘɢʀᴀᴅᴇ ɪɴ ᴘʀᴏɢʀᴇss"
+      -
+      - "<red>ᴅᴜʀɪɴɢ ᴜᴘɢʀᴇs, sᴘᴀᴡɴᴇʀs ᴀɴᴅ"
+      - "<red>ᴄʀᴏᴘs ᴏᴘᴇʀᴀᴛᴇ ᴀᴛ -50% sᴘᴇᴇᴅ."
+      - ""
+      - "<yellow>Time Left: <time>m <time>s"
+      - ""
+      - "<gradient:#FC5C5D:#4EDEFF><b>───────────</b></gradient>"
+      - "<gradient:#FC5C5D:#4EDEFF><b>⚡ SKIP THE WAIT:</b></gradient> <yellow>5⛃"
+      - "<gradient:#FC5C5D:#4EDEFF><b>───────────</b></gradient>"
+      - ""
+      - "<red>➜ Insufficient Funds"
+
+  upgraded_button:
+    material: LIME_STAINED_GLASS_PANE
+    name: "<gold>Level <level>"
+
+    lore:
+      - "<dark_gray>ʙᴏʀᴅᴇʀ ᴜᴘɢʀᴀᴅᴇ"
+      - ""
+      - "<green><u>ᴛʜɪs ᴜᴘɢʀᴀᴅᴇ ɪs ᴄʟᴀɪᴍᴇᴅ"
+      - ""
+      - "<yellow><b>| <reset><gray>Border Size: <#6FC3EB><size>x<size>"
+      - "<yellow><b>| <reset><gray>Price: <dark_green>$<green><price>"
+      - "<yellow><b>| <reset><gray>EXP: <yellow><exp> 🧪"
+
+upgrades:
+  1:
+    slot: 10
+    size: 16
+    price: 0
+    exp: 0
+    time: 60
+    credits: 5
+    vip: false
+  2:
+    slot: 11
+    size: 28
+    price: 5000
+    exp: 5
+    time: 300
+    credits: 5
+    vip: false
+  3:
+    slot: 12
+    size: 40
+    price: 15000
+    exp: 6
+    time: 600
+    credits: 5
+    vip: false
+  4:
+    slot: 13
+    size: 52
+    price: 30000
+    exp: 7
+    time: 600
+    credits: 5
+    vip: false
+  5:
+    slot: 14
+    size: 64
+    price: 60000
+    exp: 9
+    time: 600
+    credits: 5
+    vip: false
+  6:
+    slot: 15
+    size: 76
+    price: 390000
+    exp: 11
+    time: 600
+    credits: 5
+    vip: false
+  7:
+    slot: 16
+    size: 88
+    price: 510000
+    exp: 13
+    time: 600
+    credits: 5
+    vip: false
+  8:
+    slot: 19
+    size: 100
+    price: 660000
+    exp: 16
+    time: 600
+    credits: 5
+    vip: false
+  9:
+    slot: 20
+    size: 112
+    price: 900000
+    exp: 19
+    time: 600
+    credits: 5
+    vip: false
+  10:
+    slot: 21
+    size: 124
+    price: 1140000
+    exp: 23
+    time: 600
+    credits: 5
+    vip: false
+  11:
+    slot: 22
+    size: 136
+    price: 1380000
+    exp: 27
+    time: 600
+    credits: 5
+    vip: false
+  12:
+    slot: 23
+    size: 148
+    price: 1710000
+    exp: 32
+    time: 600
+    credits: 5
+    vip: false
+  13:
+    slot: 24
+    size: 160
+    price: 2070000
+    exp: 38
+    time: 600
+    credits: 5
+    vip: false
+  14:
+    slot: 25
+    size: 172
+    price: 2430000
+    exp: 45
+    time: 600
+    credits: 5
+    vip: false

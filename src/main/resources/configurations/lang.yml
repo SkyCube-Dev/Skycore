@@ -1,0 +1,23 @@
+# SkyCore Configuration
+
+pets:
+  prefix: "<gray>(/pets) ♦ "
+  usePrefix: true
+
+  only-players: "<red>Only players can use the pet menu!"
+  no-permission: "<red>You do not have permission to do that!"
+  reload: "<green>Successfully reloaded config and pets!"
+  unequip-all: "<red>All pets have been unequipped."
+  pet-equip: "<pet><reset><green> equipped successfully!"
+  pet-unequip: "<red>Unequipped <pet><red>."
+  max-pets-reached: "<red>You can only equip up to 3 pets!"
+
+  # Admin Commands
+  player-not-found: "<red>Player doesn't exist!"
+  invalid-pet: "<red>The pet '<yellow><id></yellow>' is invalid."
+  give-success-sender: "<gray>Gave <white><pet></white> to <green><target></green>."
+  give-success-target: "<gray>You received the <white><pet></white> pet!"
+  remove-success: "<red>Removed <pet><reset><red> from <yellow><target></yellow>."
+  already-owns: "<red><target> already owns the <white><pet></white> pet!"
+  does-not-own: "<red><target> does not own the <white><pet></white> pet!"
+  giveall-success: "<green>Successfully gave <b>all pets</b> <green>to <yellow><target>"

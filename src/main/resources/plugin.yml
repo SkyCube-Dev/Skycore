@@ -1,0 +1,10 @@
+name: SkyCore
+version: '1.0-dev'
+main: dev.jackwith.skyCoreV2.SkyCore
+api-version: '1.21'
+depend:
+  - ModelEngine
+  - BentoBox
+  - Vault
+  - PlayerPoints
+  - ShopGUIPlus
