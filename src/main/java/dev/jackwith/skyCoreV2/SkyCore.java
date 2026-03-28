@@ -200,19 +200,14 @@ public final class SkyCore extends JavaPlugin {
 
     private void setupPets() {
         long start = System.nanoTime();
-        StackTrace.info("(Pets) Starting setup...");
 
         try {
             this.petService = new PetService(petsDB);
             this.modelManager = new PetModel();
-            StackTrace.info("(Pets) Services initialized");
-            StackTrace.info("(Pets) Listener registered");
-
-            StackTrace.info("(Pets) Commands registered");
 
             long end = System.nanoTime();
             double ms = (end - start) / 1_000_000.0;
-            StackTrace.info("(Pets) Setup complete (" + String.format("%.2f", ms) + "ms)");
+            StackTrace.info("(Pets) complete (" + String.format("%.2f", ms) + "ms)");
 
         } catch (Exception e) {
             StackTrace.error("(Pets) Setup failed", e);
