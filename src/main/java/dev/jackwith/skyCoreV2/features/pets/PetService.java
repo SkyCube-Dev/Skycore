@@ -98,8 +98,8 @@ public class PetService {
         equipped.add(petId);
 
         Pet pet = getPet(petId);
-        if (player != null && pet != null && pet.getModelName() != null) {
-            SkyCore.getInstance().getModelManager().spawnPetModel(player, pet.getModelName());
+        if (player != null && pet != null && pet.modelName() != null) {
+            SkyCore.getInstance().getModelManager().spawnPetModel(player, pet.modelName());
         }
         return true;
     }
@@ -110,7 +110,7 @@ public class PetService {
 
         Pet pet = getPet(petId);
         if (pet != null) {
-            SkyCore.getInstance().getModelManager().removeSpecificPet(uuid, pet.getModelName());
+            SkyCore.getInstance().getModelManager().removeSpecificPet(uuid, pet.modelName());
         }
     }
 

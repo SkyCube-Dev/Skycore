@@ -17,7 +17,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PetModel {
 
     private final Map<UUID, List<ModeledEntity>> activePets = new ConcurrentHashMap<>();
-    private static final double[] ANGLES = {0, 65, -65, 130, -130};
 
     public void spawnPetModel(Player player, String modelId) {
         ArmorStand stand = player.getWorld().spawn(player.getLocation(), ArmorStand.class, entity -> {
@@ -105,8 +104,7 @@ public class PetModel {
         if (pets != null) {
             for (ModeledEntity m : pets) {
                 Object object = m.getBase().getOriginal();
-                if (object instanceof ArmorStand) {
-                    ArmorStand s = (ArmorStand)object;
+                if (object instanceof ArmorStand s) {
                     s.remove();
                 }
                 m.destroy();

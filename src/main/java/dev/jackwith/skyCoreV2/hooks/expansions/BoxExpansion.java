@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.database.objects.Island;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class BoxExpansion extends PlaceholderExpansion {
@@ -37,7 +38,7 @@ public class BoxExpansion extends PlaceholderExpansion {
 
         if (params.equalsIgnoreCase("bordersize")) {
             Optional<Island> island = Optional.ofNullable(BentoBox.getInstance().getIslands()
-                    .getIsland(Bukkit.getWorld("boxed_world"), player.getUniqueId()));
+                    .getIsland(Objects.requireNonNull(Bukkit.getWorld("boxed_world")), player.getUniqueId()));
 
             if (island.isPresent()) {
                 int size = island.get().getProtectionRange() * 2;

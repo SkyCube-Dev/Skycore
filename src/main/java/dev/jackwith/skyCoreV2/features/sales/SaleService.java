@@ -100,7 +100,7 @@ public class SaleService {
         for (String id : service.getEquippedPets(uuid)) {
             Pet pet = SkyCore.getInstance().getPetService().getPet(id);
             if (pet != null) {
-                totalBoost += pet.getBoost();
+                totalBoost += pet.boost();
             }
         }
 

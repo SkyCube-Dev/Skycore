@@ -58,7 +58,7 @@ public class PowersGUIListener implements Listener {
             player.closeInventory();
             return;
         }
-        if (slot == 41 || slot >= 36) return; // Info slots
+        if (slot >= 36) return;
 
         String powerKey = slotToPower.get(slot);
         if (powerKey == null) return;

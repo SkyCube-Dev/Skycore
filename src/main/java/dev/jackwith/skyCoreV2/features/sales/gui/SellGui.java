@@ -81,6 +81,7 @@ public class SellGui implements InventoryHolder {
         }
 
         String titleText = "<green><b>+$" + String.format("%.2f", finalPayout);
+        assert data != null;
         String subtitleText = "<gray>You sold <green><u>" + data.getAmount() + "<reset><gray> items in this batch";
 
         Title title = Title.title(
@@ -108,10 +109,10 @@ public class SellGui implements InventoryHolder {
         player.sendMessage(mm.deserialize(message));
     }
 
-    private void returnItem(Player player, ItemStack item) {
-        HashMap<Integer, ItemStack> remaining = player.getInventory().addItem(item);
-        for (ItemStack leftOver : remaining.values()) {
-            player.getWorld().dropItemNaturally(player.getLocation(), leftOver);
-        }
-    }
+//    private void returnItem(Player player, ItemStack item) {
+//        HashMap<Integer, ItemStack> remaining = player.getInventory().addItem(item);
+//        for (ItemStack leftOver : remaining.values()) {
+//            player.getWorld().dropItemNaturally(player.getLocation(), leftOver);
+//        }
+//    }
 }

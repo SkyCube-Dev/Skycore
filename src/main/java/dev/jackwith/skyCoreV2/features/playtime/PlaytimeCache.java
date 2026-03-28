@@ -7,7 +7,6 @@ import java.util.UUID;
 public class PlaytimeCache {
     private final Map<UUID, Long> sessionStart = new HashMap<>();
     private final Map<UUID, Long> lastActivity = new HashMap<>();
-    private final long AFK_THRESHOLD_MS = 300_000; // 5 minutes
 
     public void startTracking(UUID uuid) {
         long now = System.currentTimeMillis();
@@ -20,6 +19,8 @@ public class PlaytimeCache {
     }
 
     public boolean isAfk(UUID uuid) {
+        // 5 minutes
+        long AFK_THRESHOLD_MS = 300_000;
         return (System.currentTimeMillis() - lastActivity.getOrDefault(uuid, 0L)) > AFK_THRESHOLD_MS;
     }
 

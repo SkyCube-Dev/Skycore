@@ -107,10 +107,6 @@ public class SalesDB implements Database {
         }
     }
 
-    public Connection getRawConnection() {
-        return connection;
-    }
-
     @Override
     public void close() {
         try {

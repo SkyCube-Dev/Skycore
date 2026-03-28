@@ -2,6 +2,7 @@ package dev.jackwith.skyCoreV2.features.powers.gui;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.jspecify.annotations.NonNull;
 
 public class PowersHolder implements InventoryHolder {
     private PowersGui gui;
@@ -14,7 +15,7 @@ public class PowersHolder implements InventoryHolder {
         this.gui = gui;
     }
 
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         return null;
     }
 }

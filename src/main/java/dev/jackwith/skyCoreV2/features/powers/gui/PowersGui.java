@@ -58,7 +58,7 @@ public class PowersGui {
             PlayerPowerData data = db.getCachedPlayerPower(player.getUniqueId());
             String power = data.getPower();
 
-            ItemStack head = createHead(player, "<i:false><#54FC54>🟢 <#FC5454><b>CURRENT POWER</b>",
+            ItemStack head = createHead(player,
                     Collections.singletonList(MM.deserialize(Optional.ofNullable(plugin.getPowerManger().getCachedPower(power))
                             .map(PowerData::getName).orElse("None"))));
             map.put(41, head);
@@ -100,12 +100,12 @@ public class PowersGui {
         }
     }
 
-    private ItemStack createHead(Player p, String name, List<Component> lore) {
+    private ItemStack createHead(Player p, List<Component> lore) {
         ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         if (meta != null) {
             meta.setOwningPlayer(p);
-            meta.displayName(MM.deserialize(name));
+            meta.displayName(MM.deserialize("<i:false><#54FC54>🟢 <#FC5454><b>CURRENT POWER</b>"));
             meta.lore(lore);
             head.setItemMeta(meta);
         }

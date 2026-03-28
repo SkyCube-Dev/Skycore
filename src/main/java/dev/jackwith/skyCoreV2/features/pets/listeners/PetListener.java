@@ -22,7 +22,6 @@ import java.util.UUID;
 public class PetListener implements Listener {
 
     private final PetService service;
-    private final MiniMessage mm = MiniMessage.miniMessage();
 
     public PetListener(PetService service) {
         this.service = service;
@@ -108,7 +107,7 @@ public class PetListener implements Listener {
 
         if (petId != null) {
             Pet pet = service.getPet(petId);
-            String petName = (pet != null) ? pet.getName() : petId;
+            String petName = (pet != null) ? pet.name() : petId;
 
             if (service.getEquippedPets(uuid).contains(petId)) {
                 service.unequipPet(uuid, petId);
@@ -133,7 +132,7 @@ public class PetListener implements Listener {
         service.getEquippedPets(uuid).forEach(id -> {
             Pet pet = service.getPet(id);
             if (pet != null) {
-                SkyCore.getInstance().getModelManager().spawnPetModel(player, pet.getModelName());
+                SkyCore.getInstance().getModelManager().spawnPetModel(player, pet.modelName());
             }
         });
     }

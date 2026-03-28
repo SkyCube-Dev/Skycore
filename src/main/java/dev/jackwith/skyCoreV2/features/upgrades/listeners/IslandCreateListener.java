@@ -1,9 +1,8 @@
-package dev.jackwith.skyCoreV2.features.upgrades.Listeners;
+package dev.jackwith.skyCoreV2.features.upgrades.listeners;
 
 import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.hooks.BentoBoxHook;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -60,6 +59,7 @@ public class IslandCreateListener implements Listener {
             ConfigurationSection levelData = plugin.getUpgradesConfig().getConfigurationSection("upgrades." + currentLevel);
 
             if (levelData != null) {
+                assert ownerUuid != null;
                 plugin.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
             }
         }

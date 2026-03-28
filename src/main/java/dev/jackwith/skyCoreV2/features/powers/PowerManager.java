@@ -17,8 +17,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class PowerManager {
-    private final Map<String, PowerData> powerCache = new ConcurrentHashMap<String, PowerData>();
-    private final List<PowerData> powerListView = new ArrayList<PowerData>();
+    private final Map<String, PowerData> powerCache = new ConcurrentHashMap<>();
+    private final List<PowerData> powerListView = new ArrayList<>();
 
     public static void applyPower(Player player, String powerKey) {
         PowerManager.removePower(player);

@@ -101,12 +101,12 @@ public final class SkyCore extends JavaPlugin {
                 new PetCommand(this.petService)
         );
 
-        commandRegistry.getManager().getCommandCompletions().registerCompletion("players", c ->
+        commandRegistry.manager().getCommandCompletions().registerCompletion("players", c ->
                 Bukkit.getOnlinePlayers().stream().map(Player::getName).toList()
         );
 
-        commandRegistry.getManager().getCommandCompletions().registerCompletion("pets", c ->
-                petService.getAllPets().stream().map(Pet::getId).toList()
+        commandRegistry.manager().getCommandCompletions().registerCompletion("pets", c ->
+                petService.getAllPets().stream().map(Pet::id).toList()
         );
 
         ListenerRegistry listenerRegistry = new ListenerRegistry(this);

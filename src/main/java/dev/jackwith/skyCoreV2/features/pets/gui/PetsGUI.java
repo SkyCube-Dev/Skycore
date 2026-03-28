@@ -84,12 +84,12 @@ public class PetsGUI {
 
         available.sort((p1, p2) -> {
             return switch (sort) {
-                case HIGHEST_BOOST -> Integer.compare(p2.getBoost(), p1.getBoost());
-                case LOWEST_BOOST -> Integer.compare(p1.getBoost(), p2.getBoost());
+                case HIGHEST_BOOST -> Integer.compare(p2.boost(), p1.boost());
+                case LOWEST_BOOST -> Integer.compare(p1.boost(), p2.boost());
                 case NEWEST ->
-                        Long.compare(service.getAcquisitionDate(uuid, p2.getId()), service.getAcquisitionDate(uuid, p1.getId()));
+                        Long.compare(service.getAcquisitionDate(uuid, p2.id()), service.getAcquisitionDate(uuid, p1.id()));
                 case OLDEST ->
-                        Long.compare(service.getAcquisitionDate(uuid, p1.getId()), service.getAcquisitionDate(uuid, p2.getId()));
+                        Long.compare(service.getAcquisitionDate(uuid, p1.id()), service.getAcquisitionDate(uuid, p2.id()));
             };
         });
 
@@ -112,16 +112,16 @@ public class PetsGUI {
     }
 
     private static ItemStack createPetItem(Pet pet) {
-        ItemStack item = new ItemStack(pet.getMaterial());
+        ItemStack item = new ItemStack(pet.material());
         ItemMeta meta = item.getItemMeta();
 
         MiniMessage miniMessage = MiniMessage.miniMessage();
 
-        String displayNameText = "<italic:false>" + pet.getName() + "<reset><italic:false> <#A8A8A8>| <#2CFC65>+" + pet.getBoost() + "% Sell Boost ⚡";
+        String displayNameText = "<italic:false>" + pet.name() + "<reset><italic:false> <#A8A8A8>| <#2CFC65>+" + pet.boost() + "% Sell Boost ⚡";
         Component displayName = miniMessage.deserialize(displayNameText);
         meta.displayName(displayName);
 
-        String rarityText = SkyCore.getInstance().getPetConfig().getString("rarities." + pet.getRarity().toLowerCase(), "&cUNKNOWN");
+        String rarityText = SkyCore.getInstance().getPetConfig().getString("rarities." + pet.rarity().toLowerCase(), "&cUNKNOWN");
         Component rarityLine = miniMessage.deserialize("<italic:false>" + rarityText);
 
         List<Component> lore = new ArrayList<>();
@@ -134,10 +134,10 @@ public class PetsGUI {
         meta.lore(lore);
 
         NamespacedKey key = new NamespacedKey(SkyCore.getInstance(), "pet_id");
-        meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, pet.getId());
+        meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, pet.id());
 
         // Idk how to fix this deprecation
-        meta.setCustomModelData(pet.getModelData());
+        meta.setCustomModelData(pet.modelData());
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         item.setItemMeta(meta);
 

@@ -52,8 +52,8 @@ public class PetCommand extends BaseCommand {
 
         int count = 0;
         for (Pet pet : service.getAllPets()) {
-            if (!service.hasPet(target.getUniqueId(), pet.getId())) {
-                service.givePet(target.getUniqueId(), pet.getId());
+            if (!service.hasPet(target.getUniqueId(), pet.id())) {
+                service.givePet(target.getUniqueId(), pet.id());
                 count++;
             }
         }
@@ -71,14 +71,14 @@ public class PetCommand extends BaseCommand {
             return;
         }
 
-        if (service.hasPet(target.getUniqueId(), pet.getId())) {
-            Lang.sendCommandLang(sender, "already-owns", "<target>", target.getName(), "<pet>", pet.getName());
+        if (service.hasPet(target.getUniqueId(), pet.id())) {
+            Lang.sendCommandLang(sender, "already-owns", "<target>", target.getName(), "<pet>", pet.name());
             return;
         }
 
-        service.givePet(target.getUniqueId(), pet.getId());
-        Lang.sendCommandLang(sender, "give-success-sender", "<pet>", pet.getName(), "<target>", target.getName());
-        Lang.sendCommandLang((CommandSender) target, "give-success-target", "<pet>", pet.getName());
+        service.givePet(target.getUniqueId(), pet.id());
+        Lang.sendCommandLang(sender, "give-success-sender", "<pet>", pet.name(), "<target>", target.getName());
+        Lang.sendCommandLang((CommandSender) target, "give-success-target", "<pet>", pet.name());
     }
 
     @Subcommand("remove")
@@ -91,12 +91,12 @@ public class PetCommand extends BaseCommand {
             return;
         }
 
-        if (!service.hasPet(target.getUniqueId(), pet.getId())) {
-            Lang.sendCommandLang(sender, "does-not-own", "<target>", target.getName(), "<pet>", pet.getName());
+        if (!service.hasPet(target.getUniqueId(), pet.id())) {
+            Lang.sendCommandLang(sender, "does-not-own", "<target>", target.getName(), "<pet>", pet.name());
             return;
         }
 
-        service.removePet(target.getUniqueId(), pet.getId());
-        Lang.sendCommandLang(sender, "remove-success", "<pet>", pet.getName(), "<target>", target.getName());
+        service.removePet(target.getUniqueId(), pet.id());
+        Lang.sendCommandLang(sender, "remove-success", "<pet>", pet.name(), "<target>", target.getName());
     }
 }

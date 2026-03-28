@@ -2,6 +2,7 @@ package dev.jackwith.skyCoreV2.features.playtime.listeners;
 
 import dev.jackwith.skyCoreV2.databases.AnalyticsDB;
 import dev.jackwith.skyCoreV2.features.playtime.PlaytimeCache;
+import dev.jackwith.skyCoreV2.utils.StackTrace;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -68,7 +69,7 @@ public class PlaytimeListener implements Listener {
             try {
                 db.addPlaytime(String.valueOf(uuid), seconds, afk);
             } catch (Exception e) {
-                e.printStackTrace();
+                StackTrace.error("Saving Player", e);
             }
         });
     }

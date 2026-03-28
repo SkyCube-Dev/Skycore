@@ -145,13 +145,9 @@ public class PowerDB implements Database {
         }
     }
 
-    public Connection getRawConnection() {
-        return conn;
-    }
-
     private void startAutoFlush() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(
-                (Plugin) SkyCore.getInstance(),
+                SkyCore.getInstance(),
                 this::flushDirtyPlayers,
                 200L,
                 200L

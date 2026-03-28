@@ -3,12 +3,9 @@ package dev.jackwith.skyCoreV2.databases;
 import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.utils.StackTrace;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.sql.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -129,10 +126,6 @@ public class UpgradeDB implements Database {
         }
     }
 
-    public Connection getRawConnection() {
-        return connection;
-    }
-
     public void unloadUserData(UUID uuid) {
         if (dirtyPlayers.contains(uuid)) flushDirtyPlayers();
         levelCache.remove(uuid);
@@ -150,7 +143,7 @@ public class UpgradeDB implements Database {
 
     private void startAutoFlushTask() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(
-                (Plugin) SkyCore.getInstance(),
+                SkyCore.getInstance(),
                 this::flushDirtyPlayers,
                 200L,
                 200L

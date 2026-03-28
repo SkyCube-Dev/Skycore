@@ -29,7 +29,6 @@ public class PowerEffectsListener implements Listener {
     private final SkyCore plugin = SkyCore.getInstance();
     private final String META = "TEMP_POWER_BLOCK";
     private final String PENDING = "REMOVAL_PENDING";
-    private final String HULK = "HULK_PROCESSING";
     private final Map<UUID, Location> lastPlatform = new HashMap<>();
 
     public void startTask() {
@@ -81,6 +80,7 @@ public class PowerEffectsListener implements Listener {
 
         Player p = e.getPlayer();
         String power = plugin.getPowerDB().getPower(p.getUniqueId());
+        String HULK = "HULK_PROCESSING";
         if (!"hulk".equalsIgnoreCase(power) || b.hasMetadata(HULK)) return;
 
         if (!p.getInventory().getItemInMainHand().getType().name().contains("PICKAXE")) return;
@@ -146,7 +146,7 @@ public class PowerEffectsListener implements Listener {
                 b.removeMetadata(PENDING, plugin);
                 scheduleRemoval(b);
             } else {
-                Object data = b.getMetadata(META).get(0).value();
+                Object data = b.getMetadata(META).getFirst().value();
                 if (data instanceof BlockData original) b.setBlockData(original, false);
                 b.removeMetadata(META, plugin);
                 b.removeMetadata(PENDING, plugin);

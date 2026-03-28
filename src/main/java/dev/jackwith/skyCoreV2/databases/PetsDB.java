@@ -156,10 +156,6 @@ public class PetsDB implements Database {
         }
     }
 
-    public Connection getRawConnection() {
-        return connection;
-    }
-
     public void close() {
         try {
             if (connection != null && !connection.isClosed()) {
