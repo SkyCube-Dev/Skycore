@@ -1,6 +1,5 @@
 package dev.jackwith.skyCoreV2;
 
-import co.aikar.commands.PaperCommandManager;
 import dev.jackwith.skyCoreV2.commands.*;
 import dev.jackwith.skyCoreV2.databases.*;
 import dev.jackwith.skyCoreV2.features.analytics.listeners.LoggerListener;
@@ -64,12 +63,6 @@ public final class SkyCore extends JavaPlugin {
     private UpgradeDB upgradeDatabase;
     private PowerManager powerManager;
 
-    private DatabaseRegistry dbRegistry;
-    private CommandRegistry commandRegistry;
-    private ListenerRegistry listenerRegistry;
-
-    private PaperCommandManager commandManager;
-
     public SkyCore() {
         instance = this;
     }
@@ -83,7 +76,7 @@ public final class SkyCore extends JavaPlugin {
         }
 
         if (!setupEconomy()) {
-            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+//            getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -99,7 +92,7 @@ public final class SkyCore extends JavaPlugin {
         this.playtimeManager = new PlaytimeManager(this);
         this.playtimeManager.enable();
 
-        commandRegistry = new CommandRegistry(this);
+        CommandRegistry commandRegistry = new CommandRegistry(this);
         commandRegistry.registerAll(
                 new PowersCommand(),
                 new UpgradesCommand(),
@@ -109,14 +102,14 @@ public final class SkyCore extends JavaPlugin {
         );
 
         commandRegistry.getManager().getCommandCompletions().registerCompletion("players", c ->
-                Bukkit.getOnlinePlayers().stream().map(p -> p.getName()).toList()
+                Bukkit.getOnlinePlayers().stream().map(Player::getName).toList()
         );
 
         commandRegistry.getManager().getCommandCompletions().registerCompletion("pets", c ->
                 petService.getAllPets().stream().map(Pet::getId).toList()
         );
 
-        listenerRegistry = new ListenerRegistry(this);
+        ListenerRegistry listenerRegistry = new ListenerRegistry(this);
         listenerRegistry.registerAll(
                 new PetListener(this.petService),
 
@@ -179,7 +172,7 @@ public final class SkyCore extends JavaPlugin {
     }
 
     private void loadDatabases() {
-        dbRegistry = new DatabaseRegistry();
+        DatabaseRegistry dbRegistry = new DatabaseRegistry();
 
         dbRegistry.connectAll(
                 new UpgradeDB(),
@@ -223,7 +216,7 @@ public final class SkyCore extends JavaPlugin {
             return false;
         }
         econ = rsp.getProvider();
-        return econ != null;
+        return true;
     }
 
     public Economy getEconomy() {
@@ -285,7 +278,7 @@ public final class SkyCore extends JavaPlugin {
         if (!configFile.exists()) {
             this.saveResource("configurations/powers.yml", false);
         }
-        this.powersConfig = YamlConfiguration.loadConfiguration((File)configFile);
+        this.powersConfig = YamlConfiguration.loadConfiguration(configFile);
     }
 
     public PlayerPointsAPI getPpAPI() { return this.ppAPI; }
