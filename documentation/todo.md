@@ -6,6 +6,7 @@ Current Build: SkyCube-Dev
 No Status: Sleep
 
 # Upgrades
+- [x] Setup mongodb database (3/29/26)
 - [x] Fix displays being italic (3/29/26)
 - [x] Fix timers being off such as formatted weird or in seconds (3/29/26)
 - [x] Add VIP upgrade support (3/29/26)
