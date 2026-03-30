@@ -47,6 +47,13 @@ public class UpgradeListener implements Listener {
             int creditsRequired = levelSection.getInt("credits");
             double playerCredits = plugin.getPpAPI().look(player.getUniqueId());
 
+            if (levelSection.getBoolean("vip")) {
+                if (!player.hasPermission("skycore.rank.vip")) {
+                    player.sendMessage("§7(/upgrades) ♦ §fYou need to own the \uE306 rank to purchase this upgrade");
+                    return;
+                }
+            }
+
             if (playerCredits >= creditsRequired) {
                 plugin.getPpAPI().take(player.getUniqueId(), creditsRequired);
 
