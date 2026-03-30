@@ -58,7 +58,7 @@ public class IslandCreation implements Listener {
                     .getConfigurationSection("upgrades." + currentLevel);
 
             if (levelData != null) {
-                SkyCore.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
+                BentoBoxHook.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
             }
         }
     }

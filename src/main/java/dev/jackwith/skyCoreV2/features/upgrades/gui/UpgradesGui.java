@@ -2,6 +2,8 @@ package dev.jackwith.skyCoreV2.features.upgrades.gui;
 
 import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.database.UpgradesCollection;
+import dev.jackwith.skyCoreV2.hooks.BentoBoxHook;
+import dev.jackwith.skyCoreV2.utils.TimeF;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -65,7 +67,7 @@ public class UpgradesGui {
 
             ConfigurationSection nextData = upgrades.getConfigurationSection(String.valueOf(currentLevel));
             if (nextData != null) {
-                SkyCore.updateIslandSize(ownerUuid.toString(), nextData.getInt("size"), player);
+                BentoBoxHook.updateIslandSize(ownerUuid.toString(), nextData.getInt("size"), player);
             }
         }
 
@@ -133,7 +135,7 @@ public class UpgradesGui {
     private ItemStack createUpgradeItem(String type, int level, int size, double price, int exp, long timeLeft) {
         ConfigurationSection btnSection = SkyCore.getUpgradesConfig().getConfigurationSection("buttons." + type);
 
-        if (btnSection == null) return new ItemStack(Material.BARRIER);
+        if (btnSection == null) return new ItemStack(Material.STONE);
 
         Material mat = Material.valueOf(btnSection.getString("material", "STONE"));
         ItemStack item = new ItemStack(mat);
@@ -146,8 +148,7 @@ public class UpgradesGui {
         List<String> rawLore = btnSection.getStringList("lore");
         List<Component> lore = new ArrayList<>();
 
-        long minutes = timeLeft / 60;
-        long seconds = timeLeft % 60;
+        String formattedTime = TimeF.formatTime(timeLeft);
 
         for (String line : rawLore) {
             String formattedLine = line
@@ -155,7 +156,7 @@ public class UpgradesGui {
                     .replace("<size>", String.valueOf(size))
                     .replace("<price>", String.format("%,.0f", price))
                     .replace("<exp>", String.valueOf(exp))
-                    .replace("<time>", String.format("%02d:%02d", minutes, seconds));
+                    .replace("<time>", formattedTime);
             lore.add(mm.deserialize("<!italic>" + formattedLine));
         }
         meta.lore(lore);

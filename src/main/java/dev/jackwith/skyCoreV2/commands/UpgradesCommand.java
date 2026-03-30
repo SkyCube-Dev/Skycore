@@ -5,10 +5,12 @@ import co.aikar.commands.annotation.*;
 import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.database.UpgradesCollection;
 import dev.jackwith.skyCoreV2.features.upgrades.gui.UpgradesGui;
+import dev.jackwith.skyCoreV2.hooks.BentoBoxHook;
 import dev.jackwith.skyCoreV2.utils.Lang;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import world.bentobox.bentobox.BentoBox;
 
 import java.util.UUID;
 
@@ -20,7 +22,7 @@ public class UpgradesCommand extends BaseCommand {
 
     @Default
     public void UpgradeGUI(Player player) {
-        UUID islandOwnerUuid = plugin.getIslandOwnerUUID(player);
+        UUID islandOwnerUuid = BentoBoxHook.getIslandOwnerUUID(player);
         new UpgradesGui().open(player, islandOwnerUuid);
     }
 
