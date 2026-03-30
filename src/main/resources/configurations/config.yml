@@ -1,0 +1,1 @@
+uri: "mongodb://admin:123@il-01.pelicanhost.net:25050/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.1"
