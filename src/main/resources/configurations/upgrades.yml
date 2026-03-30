@@ -63,9 +63,9 @@ buttons:
       - ""
       - "<green><u>ᴛʜɪs ᴜᴘɢʀᴀᴅᴇ ɪs ᴄʟᴀɪᴍᴇᴅ"
       - ""
-      - "<yellow><b>| <reset><gray>Border Size: <#6FC3EB><size>x<size>"
-      - "<yellow><b>| <reset><gray>Price: <dark_green>$<green><price>"
-      - "<yellow><b>| <reset><gray>EXP: <yellow><exp> 🧪"
+      - "<yellow><b>| </b><gray>Border Size: <#6FC3EB><size>x<size>"
+      - "<yellow><b>| </b><gray>Price: <dark_green>$<green><price>"
+      - "<yellow><b>| </b><gray>EXP: <yellow><exp> 🧪"
 
 upgrades:
   1:

@@ -40,23 +40,26 @@ dependencies {
     // Paper API
     compileOnly "io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT"
 
-    // [ IMPLEMENTATIONS ]
+    implementation 'org.mongodb:mongodb-driver-sync:5.6.4'
     implementation "co.aikar:acf-paper:0.5.1-SNAPSHOT"
-//    implementation 'org.reflections:reflections:0.10.2'
+    implementation "net.kyori:adventure-text-minimessage:4.26.1"
+
+
+    // [ IMPLEMENTATIONS ]
 
     // [ DEPENDENCYS ]
-    compileOnly "com.ticxo.modelengine:ModelEngine:R4.0.9"
-    compileOnly('org.black_ixx:playerpoints:3.3.3')
+//    compileOnly "com.ticxo.modelengine:ModelEngine:R4.0.9"
+//    compileOnly('org.black_ixx:playerpoints:3.3.3')
     compileOnly('world.bentobox:bentobox:2.7.0-SNAPSHOT')
-    compileOnly('me.clip:placeholderapi:2.12.2')
+//    compileOnly('me.clip:placeholderapi:2.12.2')
 
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
-        exclude group: 'org.bukkit', module: 'bukkit'
-    }
+//    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
+//        exclude group: 'org.bukkit', module: 'bukkit'
+//    }
 
-    compileOnly('com.github.brcdev-minecraft:shopgui-api:3.2.0') {
-        exclude group: 'org.spigotmc', module: 'spigot-api'
-    }
+//    compileOnly('com.github.brcdev-minecraft:shopgui-api:3.2.0') {
+//        exclude group: 'org.spigotmc', module: 'spigot-api'
+//    }
 
 }
 

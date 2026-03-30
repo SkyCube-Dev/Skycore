@@ -10,15 +10,17 @@ public class Lang {
 
     private static final MiniMessage mm = MiniMessage.miniMessage();
 
+    // TODO: Make this universal to all commands.
+
     public static void sendCommandLang(CommandSender sender, String path, String... replacements) {
-        String message = SkyCore.getInstance().getLang().getString("pets." + path, path);
+        String message = SkyCore.getLangConfig().getString("pets." + path, path);
 
         for (int i = 0; i < replacements.length - 1; i += 2) {
             message = message.replace(replacements[i], replacements[i + 1]);
         }
 
-        boolean usePrefix = SkyCore.getInstance().getLang().getBoolean("pets.usePrefix", true);
-        String prefix = SkyCore.getInstance().getLang().getString("pets.prefix", "[SKYPETS] ");
+        boolean usePrefix = SkyCore.getLangConfig().getBoolean("pets.usePrefix", true);
+        String prefix = SkyCore.getLangConfig().getString("pets.prefix", "[SKYPETS] ");
 
         Component component = mm.deserialize((usePrefix ? prefix : "") + message);
 

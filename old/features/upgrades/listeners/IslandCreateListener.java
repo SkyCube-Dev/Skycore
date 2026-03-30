@@ -23,7 +23,6 @@ public class IslandCreateListener implements Listener {
     private final SkyCore plugin;
 
     {
-        new SkyCore();
         plugin = SkyCore.getInstance();
     }
 
