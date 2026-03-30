@@ -1,13 +1,13 @@
 # SkycoreV2
-Version 2.0 of the skycore plugin, made to better organize the current code, and to revise and use proper libraries to make this the best core plugin that we can currently have
+This version was already reworked, however i want to bring some changes so that the plugin will be easier to work with for the future of skycube
 
-Current Build: SkyCore-dev
+Current Build: SkyCube-Dev
 
-In Progress: Reworking
+In Progress: Reworking Upgrades
 
-## Pets
-
-- [ ] Apply Fixes (Code is outdated) ``[3/18/26] (TODO)``
-- [ ] Test to see if database works ``[3/18/26] (TODO)``
-- [ ] Test New Stacktrace methods ``[3/18/26] (TODO)``
-- [ ] Setup command libraries ``[3/18/26] (TODO)``
+# Upgrades
+- [x] Migrate data to a mongodb database (3/28/26)
+- [x] Fix displays being italic (3/29/26)
+- [x] Fix timers being off such as formatted weird or in seconds (3/29/26)
+- [x] Add VIP upgrade support (3/29/26)
+- [ ] Make VIP upgrades only be purchased by vip members (3/29/26)
