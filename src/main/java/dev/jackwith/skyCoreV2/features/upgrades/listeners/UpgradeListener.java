@@ -33,7 +33,7 @@ public class UpgradeListener implements Listener {
 
         UUID ownerUuid = holder.getOwnerUuid();
 
-        UpgradesCollection upgradesCollection = new UpgradesCollection();
+        UpgradesCollection upgradesCollection = SkyCore.getUpgradesCollection();
 
         int currentLevel = upgradesCollection.getLevel(ownerUuid.toString());
         long timeLeft = upgradesCollection.getUpgradingUntil(ownerUuid.toString());
@@ -53,9 +53,7 @@ public class UpgradeListener implements Listener {
                         .getConfigurationSection("upgrades." + nextLevel);
 
                 if (nextLevelSection == null) return;
-
-                upgradesCollection.setLevel(ownerUuid.toString(), nextLevel);
-                upgradesCollection.setUpgradingUntil(ownerUuid.toString(), 0);
+                upgradesCollection.updateDocument(ownerUuid.toString(), nextLevel, 0);
 
                 int newSize = nextLevelSection.getInt("size");
 
@@ -94,15 +92,13 @@ public class UpgradeListener implements Listener {
         plugin.getEconomy().withdrawPlayer(player, price);
         long finishTime = now + (timeSeconds * 1000L);
 
-        upgradesCollection.setUpgradingUntil(ownerUuid.toString(), finishTime);
-
-        String formattedTime = TimeF.formatTime(timeLeft);
+        upgradesCollection.updateDocument(ownerUuid.toString(), currentLevel, finishTime);
+        String formattedTime = TimeF.formatTime(timeSeconds);
 
         player.sendMessage("§a§lUPGRADE §8» §fYou started the island upgrade! the border will expand in §b" + formattedTime + "s§f.");
 
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            upgradesCollection.setLevel(ownerUuid.toString(), nextLevel);
-            upgradesCollection.setUpgradingUntil(ownerUuid.toString(), 0);
+            upgradesCollection.updateDocument(ownerUuid.toString(), nextLevel, 0);
 
             int newSize = nextLevelSection.getInt("size");
 

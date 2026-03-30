@@ -39,7 +39,7 @@ public class IslandCreation implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        UpgradesCollection Uc = new UpgradesCollection();
+        UpgradesCollection Uc = SkyCore.getUpgradesCollection();
 
         Uc.createPlayer(uuid.toString());
         int currentLevel = Uc.getLevel(uuid.toString());

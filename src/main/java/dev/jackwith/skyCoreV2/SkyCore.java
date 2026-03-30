@@ -2,6 +2,7 @@ package dev.jackwith.skyCoreV2;
 
 import dev.jackwith.skyCoreV2.commands.UpgradesCommand;
 import dev.jackwith.skyCoreV2.database.Database;
+import dev.jackwith.skyCoreV2.database.UpgradesCollection;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.CropListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.IslandCreation;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.UpgradeListener;
@@ -27,7 +28,9 @@ public final class SkyCore extends JavaPlugin {
     private static FileConfiguration configuration;
     private static FileConfiguration upgrades;
     private static FileConfiguration lang;
+
     private static Database database;
+    private static UpgradesCollection UpgradesCollection;
 
     public SkyCore() {
         instance = this;
@@ -38,6 +41,7 @@ public final class SkyCore extends JavaPlugin {
         loadConfigs();
 
         database = new Database();
+        UpgradesCollection = new UpgradesCollection();
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlayerPoints")) {
             this.ppAPI = PlayerPoints.getInstance().getAPI();
@@ -98,6 +102,8 @@ public final class SkyCore extends JavaPlugin {
     public static FileConfiguration getLangConfig() { return lang; }
 
     public static Database getDatabase() { return database; }
+    public static UpgradesCollection getUpgradesCollection() { return UpgradesCollection; }
+
     public static SkyCore getInstance() { return instance; }
 
 }

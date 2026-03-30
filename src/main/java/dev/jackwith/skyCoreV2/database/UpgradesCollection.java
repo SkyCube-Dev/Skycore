@@ -5,23 +5,35 @@ import com.mongodb.client.MongoDatabase;
 import dev.jackwith.skyCoreV2.SkyCore;
 import org.bson.Document;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 public class UpgradesCollection {
 
     private final MongoCollection<Document> collection;
+    private final ConcurrentHashMap<String, CachedData> cache = new ConcurrentHashMap<>();
+
+    private static class CachedData {
+        Document doc;
+        long timestamp;
+        CachedData(Document doc) {
+            this.doc = doc;
+            this.timestamp = System.currentTimeMillis();
+        }
+        boolean isExpired() {
+            return System.currentTimeMillis() - timestamp > 5000;
+        }
+    }
 
     public UpgradesCollection() {
         Database db = SkyCore.getDatabase();
         MongoDatabase mongoDatabase = db.getDatabase();
 
         this.collection = mongoDatabase.getCollection("boxes");
-    }
-
-    public MongoCollection<Document> getCollection() {
-        return collection;
+        this.collection.createIndex(new Document("uuid", 1));
     }
 
     public void createPlayer(String uuid) {
-        Document existing = collection.find(new Document("uuid", uuid)).first();
+        Document existing = getPlayerData(uuid);
 
         if (existing == null) {
             Document doc = new Document("uuid", uuid)
@@ -29,38 +41,48 @@ public class UpgradesCollection {
                     .append("upgrading_until", 0L);
 
             collection.insertOne(doc);
+            cache.put(uuid, new CachedData(doc));
         }
     }
 
     // Helpers
 
-    public int getLevel(String uuid) {
-        Document doc = collection.find(new Document("uuid", uuid)).first();
-        if (doc != null) {
-            return doc.getInteger("level", 1);
+    public Document getPlayerData(String uuid) {
+        CachedData cached = cache.get(uuid);
+        if (cached != null && !cached.isExpired()) {
+            return cached.doc;
         }
-        return 1;
+
+        Document doc = collection.find(new Document("uuid", uuid)).first();
+
+        if (doc != null) {
+            cache.put(uuid, new CachedData(doc));
+        }
+
+        return doc;
     }
 
-    public void setLevel(String uuid, int level) {
-        collection.updateOne(
-                new Document("uuid", uuid),
-                new Document("$set", new Document("level", level))
-        );
+    public int getLevel(String uuid) {
+        Document doc = getPlayerData(uuid);
+        return doc != null ? doc.getInteger("level", 1) : 1;
     }
 
     public long getUpgradingUntil(String uuid) {
-        Document doc = collection.find(new Document("uuid", uuid)).first();
-        if (doc != null) {
-            return doc.getLong("upgrading_until") != null ? doc.getLong("upgrading_until") : 0L;
-        }
-        return 0L;
+        Document doc = getPlayerData(uuid);
+        return doc != null ? doc.getLong("upgrading_until") : 0L;
     }
 
-    public void setUpgradingUntil(String uuid, long timestamp) {
+    public void updateDocument(String uuid, int level, long timestamp) {
         collection.updateOne(
                 new Document("uuid", uuid),
-                new Document("$set", new Document("upgrading_until", timestamp))
+                new Document("$set", new Document()
+                        .append("level", level)
+                        .append("upgrading_until", timestamp))
         );
+        removeCache(uuid);
+    }
+
+    private void removeCache(String uuid) {
+        cache.remove(uuid);
     }
 }

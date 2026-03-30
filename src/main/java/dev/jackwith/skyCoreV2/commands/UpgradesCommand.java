@@ -10,7 +10,6 @@ import dev.jackwith.skyCoreV2.utils.Lang;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import world.bentobox.bentobox.BentoBox;
 
 import java.util.UUID;
 
@@ -35,7 +34,7 @@ public class UpgradesCommand extends BaseCommand {
             return;
         }
 
-        upgradeDB.setLevel(target.getUniqueId().toString(), level);
+        upgradeDB.updateDocument(target.getUniqueId().toString(), level, 0);
 
         sender.sendMessage(Lang.getColored("&aSet upgrade level of " + target.getName()) + " to " + level);
         if (target.isOnline()) {

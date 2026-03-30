@@ -53,15 +53,15 @@ public class UpgradesGui {
         ConfigurationSection upgrades = SkyCore.getUpgradesConfig().getConfigurationSection("upgrades");
         if (upgrades == null) return;
 
-        UpgradesCollection col = new UpgradesCollection();
+        UpgradesCollection col = SkyCore.getUpgradesCollection();
 
         int currentLevel = col.getLevel(ownerUuid.toString());
         long upgradingTimer = col.getUpgradingUntil(ownerUuid.toString());
         long now = System.currentTimeMillis();
 
         if (upgradingTimer > 0 && upgradingTimer <= now) {
-            col.setLevel(ownerUuid.toString(), currentLevel + 1);
-            col.setUpgradingUntil(ownerUuid.toString(), 0);
+            col.updateDocument(ownerUuid.toString(), currentLevel + 1, 0);
+
             currentLevel++;
             upgradingTimer = 0;
 
@@ -72,7 +72,6 @@ public class UpgradesGui {
         }
 
         boolean isUpgrading = upgradingTimer > now;
-        long timeLeft = isUpgrading ? (upgradingTimer - now) / 1000 : 0;
 
         for (String key : upgrades.getKeys(false)) {
             ConfigurationSection levelData = upgrades.getConfigurationSection(key);
@@ -84,6 +83,8 @@ public class UpgradesGui {
                 int size = levelData.getInt("size");
                 double price = levelData.getDouble("price");
                 int exp = levelData.getInt("exp");
+
+                long timeLeft = isUpgrading ? (upgradingTimer - now) / 1000 : levelData.getInt("time");
 
                 boolean isVip = levelData.getBoolean("vip", false);
                 boolean hasVip = player.hasPermission("skycore.vip");

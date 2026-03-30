@@ -60,7 +60,7 @@ public class CropListener implements Listener {
             return false;
         }
 
-        UpgradesCollection collection = new UpgradesCollection();
+        UpgradesCollection collection = SkyCore.getUpgradesCollection();
 
         long upgradingUntil = collection.getUpgradingUntil(owner.toString());
         return upgradingUntil > System.currentTimeMillis();
