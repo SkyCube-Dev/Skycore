@@ -42,6 +42,8 @@ public class UpgradeListener implements Listener {
         ConfigurationSection levelSection = SkyCore.getUpgradesConfig().getConfigurationSection("upgrades." + currentLevel);
 
         if (timeLeft > now) {
+            assert levelSection != null;
+
             int creditsRequired = levelSection.getInt("credits");
             double playerCredits = plugin.getPpAPI().look(player.getUniqueId());
 

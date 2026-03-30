@@ -18,7 +18,7 @@ public class TimeF {
         if (minutes > 0) {
             time.append(minutes).append("m ");
         }
-        if (seconds > 0 || time.length() == 0) {
+        if (seconds > 0 || time.isEmpty()) {
             time.append(seconds).append("s");
         }
 

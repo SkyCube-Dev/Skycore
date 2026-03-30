@@ -70,7 +70,7 @@ public class BentoBoxHook {
         } catch (Exception ignored) {
         }
 
-        String message = "§b§lSKYCORE §8» §fIsland protection expanded to §b" + newSize + "x" + newSize + "§f!";
+        String message = "§7(/upgrades) ♦ §fIsland protection expanded to §b" + newSize + "x" + newSize + "§f!";
         island.getMemberSet().forEach(memberUuid -> {
             Player p = Bukkit.getPlayer(memberUuid);
             if (p != null && p.isOnline()) {

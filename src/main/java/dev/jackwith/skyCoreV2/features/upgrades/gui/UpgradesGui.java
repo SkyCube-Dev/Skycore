@@ -91,7 +91,7 @@ public class UpgradesGui {
 
                 boolean isNext = level == currentLevel + 1;
 
-                String buttonType = "";
+                String buttonType;
 
                 if (level <= currentLevel) {
                     buttonType = "upgraded_button";

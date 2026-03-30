@@ -58,6 +58,7 @@ public class IslandCreation implements Listener {
                     .getConfigurationSection("upgrades." + currentLevel);
 
             if (levelData != null) {
+                assert ownerUuid != null;
                 BentoBoxHook.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
             }
         }

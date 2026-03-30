@@ -2,7 +2,6 @@ package dev.jackwith.skyCoreV2.commands;
 
 import co.aikar.commands.BaseCommand;
 import co.aikar.commands.annotation.*;
-import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.database.UpgradesCollection;
 import dev.jackwith.skyCoreV2.features.upgrades.gui.UpgradesGui;
 import dev.jackwith.skyCoreV2.hooks.BentoBoxHook;
@@ -11,12 +10,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @CommandAlias("upgrade|upgrades|expand")
 public class UpgradesCommand extends BaseCommand {
 
-    private final SkyCore plugin = SkyCore.getInstance();
     private final UpgradesCollection upgradeDB = new UpgradesCollection();
 
     @Default
@@ -30,7 +29,7 @@ public class UpgradesCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void setLevel(CommandSender sender, OfflinePlayer target, int level) {
         if (level < 0) {
-            target.getPlayer().sendMessage(Lang.getColored("&aYou cannot set a negative number " + level));
+            Objects.requireNonNull(target.getPlayer()).sendMessage(Lang.getColored("&aYou cannot set a negative number " + level));
             return;
         }
 
@@ -38,7 +37,7 @@ public class UpgradesCommand extends BaseCommand {
 
         sender.sendMessage(Lang.getColored("&aSet upgrade level of " + target.getName()) + " to " + level);
         if (target.isOnline()) {
-            target.getPlayer().sendMessage(Lang.getColored("&aYour upgrade level has been set to " + level));
+            Objects.requireNonNull(target.getPlayer()).sendMessage(Lang.getColored("&aYour upgrade level has been set to " + level));
         }
     }
 

@@ -58,7 +58,7 @@ public final class SkyCore extends JavaPlugin {
         );
 
         getServer().getPluginManager().registerEvents(new IslandCreation(), this);
-        getServer().getPluginManager().registerEvents(new CropListener(this), this);
+        getServer().getPluginManager().registerEvents(new CropListener(), this);
         getServer().getPluginManager().registerEvents(new UpgradeListener(this), this);
 
     }
@@ -68,9 +68,9 @@ public final class SkyCore extends JavaPlugin {
         database.disconnect();
     }
 
-    private @NotNull File GetConfiguration(String fileNmae) {
-        File File = new File(getDataFolder(), "configurations/" + fileNmae + ".yml");
-        if (!File.exists()) saveResource("configurations/" + fileNmae + ".yml", false);
+    private @NotNull File GetConfiguration(String fileName) {
+        File File = new File(getDataFolder(), "configurations/" + fileName + ".yml");
+        if (!File.exists()) saveResource("configurations/" + fileName + ".yml", false);
 
         return File;
     }

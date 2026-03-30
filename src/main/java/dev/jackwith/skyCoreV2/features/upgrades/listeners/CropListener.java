@@ -17,12 +17,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CropListener implements Listener {
 
-    private final SkyCore plugin;
-
-    public CropListener(SkyCore plugin) {
-        this.plugin = plugin;
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockGrow(BlockGrowEvent e) {
         if (CheckUpgrading(e.getBlock().getLocation())) {
