@@ -87,27 +87,42 @@ public class PetModel {
     }
 
     public void removeSpecificPet(UUID uuid, String modelId) {
-        Optional.ofNullable(activePets.get(uuid)).ifPresent(pets -> {
-            pets.removeIf(modeled -> {
-                boolean match = modeled.getModels().values().stream().anyMatch(m -> m.getBlueprint().getName().equalsIgnoreCase(modelId));
-                if (match) {
-                    modeled.destroy();
-                    if (modeled.getBase().getOriginal() instanceof ArmorStand s) s.remove();
-                }
-                return match;
-            });
-        });
+        List<ModeledEntity> pets = activePets.get(uuid);
+        if (pets == null) return;
+
+        List<ModeledEntity> toRemove = new ArrayList<>();
+        for (ModeledEntity modeled : new ArrayList<>(pets)) {
+            boolean match = modeled.getModels().values().stream()
+                    .anyMatch(m -> m.getBlueprint().getName().equalsIgnoreCase(modelId));
+            if (match) toRemove.add(modeled);
+        }
+
+        pets.removeAll(toRemove);
+
+        for (ModeledEntity modeled : toRemove) {
+            try {
+                if (modeled.getBase().getOriginal() instanceof ArmorStand s) s.remove();
+                Bukkit.getScheduler().runTask(SkyCore.getInstance(), modeled::destroy);
+            } catch (Exception e) {
+                SkyCore.getInstance().getLogger().warning("Failed to remove specific pet model: " + e.getMessage());
+            }
+        }
     }
 
     public void removeAllPets(UUID uuid) {
         List<ModeledEntity> pets = this.activePets.remove(uuid);
-        if (pets != null) {
-            for (ModeledEntity m : pets) {
-                Object object = m.getBase().getOriginal();
-                if (object instanceof ArmorStand s) {
+        if (pets == null) return;
+
+        List<ModeledEntity> copy = new ArrayList<>(pets);
+
+        for (ModeledEntity m : copy) {
+            try {
+                if (m.getBase().getOriginal() instanceof ArmorStand s) {
                     s.remove();
                 }
-                m.destroy();
+                Bukkit.getScheduler().runTask(SkyCore.getInstance(), m::destroy);
+            } catch (Exception e) {
+                SkyCore.getInstance().getLogger().warning("Failed to remove pet model: " + e.getMessage());
             }
         }
     }

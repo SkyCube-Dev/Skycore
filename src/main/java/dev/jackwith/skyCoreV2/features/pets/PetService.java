@@ -1,13 +1,7 @@
-// This includes all base files for pets needed for them to actual work
-// and the code used to apply sell multipliers
-
-// 3/7/26 | PetsSource
-// 3/7/26 | Jackw
-
 package dev.jackwith.skyCoreV2.features.pets;
 
 import dev.jackwith.skyCoreV2.SkyCore;
-import dev.jackwith.skyCoreV2.databases.PetsDB;
+import dev.jackwith.skyCoreV2.database.PetsCollection;
 import dev.jackwith.skyCoreV2.features.pets.gui.SortType;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -20,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PetService {
 
-    private final PetsDB db;
+    private final PetsCollection db;
     private final Map<String, Pet> registry = new ConcurrentHashMap<>();
 
     private final Map<UUID, SortType> sortCache = new ConcurrentHashMap<>();
@@ -28,14 +22,14 @@ public class PetService {
     private final Map<UUID, List<String>> equippedCache = new ConcurrentHashMap<>();
     private final Map<UUID, List<String>> ownedCache = new ConcurrentHashMap<>();
 
-    public PetService(PetsDB db) {
-        this.db = db;
+    public PetService(PetsCollection petsDB) {
+        this.db = petsDB;
         loadRegistry();
     }
 
     public void loadRegistry() {
         registry.clear();
-        ConfigurationSection section = SkyCore.getInstance().getPetConfig().getConfigurationSection("pets");
+        ConfigurationSection section = SkyCore.getPetsConfig().getConfigurationSection("pets");
         if (section == null) return;
 
         for (String key : section.getKeys(false)) {
@@ -61,8 +55,6 @@ public class PetService {
         return getOwnedPets(uuid).contains(petId);
     }
 
-
-
     public void givePet(UUID uuid, String petId) {
         db.addPet(uuid, petId);
         dateCache.computeIfAbsent(uuid, k -> new HashMap<>()).put(petId, System.currentTimeMillis());
@@ -85,11 +77,13 @@ public class PetService {
 
         Player player = Bukkit.getPlayer(uuid);
         boolean isVip = player != null && player.hasPermission("skycore.rank.vip");
-        int maxSlots = isVip ? 3 : 2;
 
-        if (equipped.size() >= maxSlots) {
-            if (player != null && !isVip) {
-                player.sendMessage(MiniMessage.miniMessage().deserialize("<red>You need <white>\uE306<red> rank to equip a 3rd pet!"));
+        int usableSlots = isVip ? db.getPetSlots(uuid) : Math.max(2, db.getPetSlots(uuid) - 1);
+
+        if (equipped.size() >= usableSlots) {
+            if (player != null && !isVip && equipped.size() == 2) {
+                player.sendMessage(MiniMessage.miniMessage().deserialize(
+                        "<red>You need <white>\uE306<red> rank to equip a 3rd pet!"));
             }
             return false;
         }
@@ -99,9 +93,17 @@ public class PetService {
 
         Pet pet = getPet(petId);
         if (player != null && pet != null && pet.modelName() != null) {
-            SkyCore.getInstance().getModelManager().spawnPetModel(player, pet.modelName());
+            SkyCore.getModelManager().spawnPetModel(player, pet.modelName());
         }
         return true;
+    }
+
+    public int getPetSlots(Player player) {
+        UUID uuid = player.getUniqueId();
+
+        int slots = db.getPetSlots(uuid);
+        boolean isVip = player != null && player.hasPermission("skycore.rank.vip");
+        return isVip ? slots : Math.max(2, slots - 1);
     }
 
     public void unequipPet(UUID uuid, String petId) {
@@ -110,7 +112,7 @@ public class PetService {
 
         Pet pet = getPet(petId);
         if (pet != null) {
-            SkyCore.getInstance().getModelManager().removeSpecificPet(uuid, pet.modelName());
+            SkyCore.getModelManager().removeSpecificPet(uuid, pet.modelName());
         }
     }
 
@@ -125,7 +127,7 @@ public class PetService {
     public SortType getSort(UUID uuid) { return sortCache.getOrDefault(uuid, SortType.HIGHEST_BOOST); }
     public void setSort(UUID uuid, SortType sort) { sortCache.put(uuid, sort); }
 
-    public long getAcquisitionDate(UUID uuid, String petId) {
+    public long getOwnedDates(UUID uuid, String petId) {
         return dateCache.computeIfAbsent(uuid, db::getAllPetAcquisitionDates).getOrDefault(petId, 0L);
     }
 

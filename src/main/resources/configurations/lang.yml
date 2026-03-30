@@ -10,7 +10,7 @@ pets:
   unequip-all: "<red>All pets have been unequipped."
   pet-equip: "<pet><reset><green> equipped successfully!"
   pet-unequip: "<red>Unequipped <pet><red>."
-  max-pets-reached: "<red>You can only equip up to 3 pets!"
+  max-pets-reached: "<red>You can only equip up to <amount> pets!"
 
   # Admin Commands
   player-not-found: "<red>Player doesn't exist!"

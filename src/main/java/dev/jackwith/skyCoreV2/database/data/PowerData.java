@@ -1,4 +1,4 @@
-package dev.jackwith.skyCoreV2.databases.data;
+package dev.jackwith.skyCoreV2.database.data;
 
 public class PowerData {
     private final String id;
