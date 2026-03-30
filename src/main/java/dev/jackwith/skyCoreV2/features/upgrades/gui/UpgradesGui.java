@@ -43,7 +43,7 @@ public class UpgradesGui {
         }
 
         for (int i = 0; i < 54; i++) {
-            if (i < 9 || i >= 45 || i % 9 == 0 || i % 9 == 8) {
+            if (i < 9 || i >= 34 || i % 9 == 0 || i % 9 == 8) {
                 inv.setItem(i, background);
             }
         }
