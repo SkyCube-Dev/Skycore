@@ -11,3 +11,10 @@ In Progress: Reworking Upgrades
 - [x] Fix timers being off such as formatted weird or in seconds (3/29/26)
 - [x] Add VIP upgrade support (3/29/26)
 - [ ] Make VIP upgrades only be purchased by vip members (3/29/26)
+
+# Changelog
+This is meant for if we wanted for a more simplifed version of our todo list
+
+- Fixed the display of upgrades
+- Fixed formats with how time is displayed in upgrades
+- Added VIP upgrades
