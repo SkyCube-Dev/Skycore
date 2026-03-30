@@ -80,12 +80,12 @@ public class UpgradeListener implements Listener {
         int requiredExp = nextLevelSection.getInt("exp");
 
         if (player.getLevel() < requiredExp) {
-            player.sendMessage("§cYou need level " + requiredExp + " to start this upgrade!");
+            player.sendMessage("§7(/upgrades) ♦ §cYou need level " + requiredExp + " to start this upgrade!");
             return;
         }
 
         if (!plugin.getEconomy().has(player, price)) {
-            player.sendMessage("§cYou don't have enough money! Cost: §e$" + String.format("%,.0f", price));
+            player.sendMessage("§7(/upgrades) ♦ §cYou don't have enough money! Cost: §e$" + String.format("%,.0f", price));
             return;
         }
 
@@ -95,7 +95,7 @@ public class UpgradeListener implements Listener {
         upgradesCollection.updateDocument(ownerUuid.toString(), currentLevel, finishTime);
         String formattedTime = TimeF.formatTime(timeSeconds);
 
-        player.sendMessage("§a§lUPGRADE §8» §fYou started the island upgrade! the border will expand in §b" + formattedTime + "s§f.");
+        player.sendMessage("§7(/upgrades) ♦ §fYou started the island upgrade! the border will expand in §b" + formattedTime + "s§f.");
 
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             upgradesCollection.updateDocument(ownerUuid.toString(), nextLevel, 0);
