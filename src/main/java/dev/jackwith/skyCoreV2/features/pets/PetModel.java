@@ -53,33 +53,65 @@ public class PetModel {
 
             List<ModeledEntity> pets = activePets.get(uuid);
             Location pLoc = player.getLocation();
-            Vector dir = pLoc.getDirection().setY(0).normalize().multiply(-1.2);
-            int size = pets.size();
+            Vector dir = pLoc.getDirection().setY(0).normalize().multiply(-1);
 
-            for (int i = 0; i < size; i++) {
-                ModeledEntity modeled = pets.get(i);
-                if (!(modeled.getBase().getOriginal() instanceof ArmorStand stand)) continue;
+            List<List<ModeledEntity>> rows = new ArrayList<>();
+            int remaining = pets.size();
+            int index = 0;
 
-                double angleRad = Math.toRadians((i - (size - 1) / 2.0) * 65);
-                double x = dir.getX() * Math.cos(angleRad) - dir.getZ() * Math.sin(angleRad);
-                double z = dir.getX() * Math.sin(angleRad) + dir.getZ() * Math.cos(angleRad);
+            int firstRowSize = Math.min(3, remaining);
+            rows.add(pets.subList(index, index + firstRowSize));
+            index += firstRowSize;
+            remaining -= firstRowSize;
 
-                Location target = pLoc.clone().add(x, 0.1 + bobbing, z);
-                float yaw = (float) (Math.atan2(pLoc.getZ() - target.getZ(), pLoc.getX() - target.getX()) * 57.2957795D) - 90F;
-                target.setYaw(yaw);
-                target.setPitch(0);
+            if (remaining > 0) {
+                int secondRowSize = Math.min(6, remaining);
+                rows.add(pets.subList(index, index + secondRowSize));
+                index += secondRowSize;
+                remaining -= secondRowSize;
+            }
 
-                Location standLoc = stand.getLocation();
-                if (!standLoc.getWorld().equals(pLoc.getWorld())) {
-                    stand.teleport(target);
-                } else {
-                    if (standLoc.distanceSquared(target) > 0.005) {
-                        stand.teleportAsync(target).thenRun(() -> {
-                            Bukkit.getScheduler().runTask(SkyCore.getInstance(), () -> {
-                                modeled.setYHeadRot(yaw);
-                                modeled.setYBodyRot(yaw);
+            while (remaining > 0) {
+                int rowSize = Math.min(3, remaining);
+                rows.add(pets.subList(index, index + rowSize));
+                index += rowSize;
+                remaining -= rowSize;
+            }
+
+            for (int rowIndex = 0; rowIndex < rows.size(); rowIndex++) {
+                List<ModeledEntity> row = rows.get(rowIndex);
+                int size = row.size();
+
+                double rowOffset = 1.2 + (rowIndex * 1.1);
+                Vector rowDir = dir.clone().multiply(rowOffset);
+
+                double arcSpread = (size <= 3) ? 55 : 45;
+
+                for (int i = 0; i < size; i++) {
+                    ModeledEntity modeled = row.get(i);
+                    if (!(modeled.getBase().getOriginal() instanceof ArmorStand stand)) continue;
+
+                    double angleRad = Math.toRadians((i - (size - 1) / 2.0) * arcSpread);
+                    double x = rowDir.getX() * Math.cos(angleRad) - rowDir.getZ() * Math.sin(angleRad);
+                    double z = rowDir.getX() * Math.sin(angleRad) + rowDir.getZ() * Math.cos(angleRad);
+
+                    Location target = pLoc.clone().add(x, 0.1 + bobbing, z);
+                    float yaw = (float) (Math.atan2(pLoc.getZ() - target.getZ(), pLoc.getX() - target.getX()) * 57.2957795D) - 90F;
+                    target.setYaw(yaw);
+                    target.setPitch(0);
+
+                    Location standLoc = stand.getLocation();
+                    if (!standLoc.getWorld().equals(pLoc.getWorld())) {
+                        stand.teleport(target);
+                    } else {
+                        if (standLoc.distanceSquared(target) > 0.005) {
+                            stand.teleportAsync(target).thenRun(() -> {
+                                Bukkit.getScheduler().runTask(SkyCore.getInstance(), () -> {
+                                    modeled.setYHeadRot(yaw);
+                                    modeled.setYBodyRot(yaw);
+                                });
                             });
-                        });
+                        }
                     }
                 }
             }

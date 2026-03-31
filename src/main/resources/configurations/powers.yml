@@ -10,8 +10,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#F4FC6D>to a smaller size </gradient><gradient:#B4CEDF:#B4CEDF>(<red>↓</red>50%)</gradient>"
 
     item:
-      material: "VILLAGER_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10216
 
 
   mario:
@@ -24,8 +24,8 @@ powers:
       line2: "<i:false><gradient:#FC3838:#FC3838>mario-style </gradient><gradient:#B4CEDF:#B4CEDF>jump boost </gradient><gradient:#54FC54:#54FC54>↑</gradient>"
 
     item:
-      material: "MOOSHROOM_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10215
 
 
   hulk:
@@ -38,8 +38,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>will </gradient><gradient:#ACE25B:#ACE25B>mine blocks </gradient><gradient:#B4CEDF:#B4CEDF>by 3x3 </gradient><gradient:#ACE25B:#ACE25B>⛏</gradient>"
 
     item:
-      material: "ZOMBIE_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10214
 
 
   frozone:
@@ -52,8 +52,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to </gradient><gradient:#87F7FC:#87F7FC>walk </gradient><gradient:#B4CEDF:#B4CEDF>on water </gradient><gradient:#87F7FC:#87F7FC>🌊👣</gradient>"
 
     item:
-      material: "DOLPHIN_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10217
 
 
   aquaman:
@@ -66,8 +66,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>water </gradient><gradient:#E2C45B:#E2C45B>breathing </gradient><gradient:#B4CEDF:#B4CEDF>ability </gradient><gradient:#E2C45B:#E2C45B>Ψ</gradient>"
 
     item:
-      material: "DROWNED_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10218
 
 
   superman:
@@ -80,8 +80,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to have </gradient><gradient:#0097F4:#0097F4>infinite </gradient><gradient:#B4CEDF:#B4CEDF>fly </gradient><gradient:#0097F4:#0097F4>🚀</gradient>"
 
     item:
-      material: "CREAKING_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10221
 
 
   inferno:
@@ -94,8 +94,8 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>to </gradient><gradient:#FC934D:#FC934D>walk </gradient><gradient:#B4CEDF:#B4CEDF>on lava </gradient><gradient:#FC934D:#FC934D>🔥👣</gradient>"
 
     item:
-      material: "BLAZE_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10219
 
 
   spiderman:
@@ -108,5 +108,5 @@ powers:
       line2: "<i:false><gradient:#B4CEDF:#B4CEDF>of </gradient><gradient:#FC6161:#FC6161>no fall </gradient><gradient:#B4CEDF:#B4CEDF>damage </gradient><gradient:#FC6161:#FC6161>🚫</gradient>"
 
     item:
-      material: "STRIDER_SPAWN_EGG"
-      custommodeldata: 7191095
+      material: "PAPER"
+      custommodeldata: 10220

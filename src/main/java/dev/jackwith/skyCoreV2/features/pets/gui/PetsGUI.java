@@ -77,12 +77,12 @@ public class PetsGUI {
             gui.setItem(STORAGE_SLOTS.get(i), (index < storagePets.size()) ? createPetItem(storagePets.get(index)) : new ItemStack(Material.AIR));
         }
 
-        gui.setItem(15, createUnequipAll());
+        gui.setItem(51, createUnequipAll());
         gui.setItem(49, createSortingHopper(service.getSort(uuid)));
 
         int totalEquippedPages = (int) Math.ceil((double) petSlots / SLOTS_PER_PAGE);
-        if (equippedPage > 1) gui.setItem(9, createArrow("<yellow><bold>«</bold> Prev Slots", -1, equippedPage, true));
-        if (equippedPage < totalEquippedPages) gui.setItem(18, createArrow("<yellow><bold>»</bold> Next Slots", 1, equippedPage, true));
+        if (equippedPage > 1) gui.setItem(11, createArrow("<yellow><bold>«</bold> Prev Slots", -1, equippedPage, true));
+        if (equippedPage < totalEquippedPages) gui.setItem(15, createArrow("<yellow><bold>»</bold> Next Slots", 1, equippedPage, true));
 
         int totalStoragePages = (int) Math.ceil((double) storagePets.size() / ITEMS_PER_PAGE);
         if (storagePage > 1) gui.setItem(48, createArrow("<yellow><bold>«</bold> Prev", -1, storagePage, false));
@@ -93,12 +93,6 @@ public class PetsGUI {
 
     public static Inventory create(Player player, int page) {
         return create(player, 1, page);
-    }
-
-    private static boolean hasRankForSlot(Player player, int slotIndex) {
-        if (slotIndex < 2) return true;
-        if (slotIndex == 2) return player.hasPermission("skycore.rank.vip");
-        return true;
     }
 
     private static List<Pet> getAllPetsForStorage(UUID uuid, List<String> owned, List<String> equipped, SortType sort) {

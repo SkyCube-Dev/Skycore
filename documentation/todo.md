@@ -16,7 +16,9 @@ In Progress
 - [x] Setup mongodb database (3/30/26)
 - [x] Improved how pets work (3/30/26)
 - [x] Added pet slots (3/30/26)
-- [ ] Fix lang file missing some sections (3/30/26)  
+- [x] Change the way arc's work with making a ring (3/30/26)
+- [x] Fix the display of how petsgui looks like
+- [x] Fix lang file missing some sections (3/30/26)  
 
 ## Misc
 

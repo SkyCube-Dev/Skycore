@@ -398,6 +398,18 @@ pets:
     model:
       modelname: "cubee_warden"
 
+  twinkle:
+    boost: 75
+    rarity: "leg"
+    name: "<b><gradient:#ad6afc:#c56ffc>TWINKLE WITCH</gradient></b>"
+
+    item:
+      item: "GOLDEN_HORSE_ARMOR"
+      modelData: 7191187
+
+    model:
+      modelname: "cubee_twinkle_witch"
+
 rarities:
   common: "<italic:false><#4FFC8B><obf>tt</obf><u>ᴄᴏᴍᴍᴏɴ ɪᴛᴇᴍ ʀᴀʀɪᴛʏ</u><obf>tt</obf>"
   rare: "<italic:false><#5feee8><obf>kk<reset><italic:false><u><gradient:#5feee8:#08c2fb>ʀᴀʀᴇ ᴘᴇᴛ ʀᴀʀɪᴛʏ</gradient><reset><italic:false><#5feee8><obf>kk"

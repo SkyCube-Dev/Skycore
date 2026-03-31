@@ -21,3 +21,8 @@ pets:
   already-owns: "<red><target> already owns the <white><pet></white> pet!"
   does-not-own: "<red><target> does not own the <white><pet></white> pet!"
   giveall-success: "<green>Successfully gave <b>all pets</b> <green>to <yellow><target>"
+
+  pet-slots-added: "<green>Successfully gave <yellow><player> <amount>x <green>pet slots."
+  pet-slots-received: "<green>You received <yellow><amount>x <green>pet slots."
+
+  pet-slots-set: "<green>Sucessfully set <yellow><player><green>'s pet slots to <yellow><amount>"

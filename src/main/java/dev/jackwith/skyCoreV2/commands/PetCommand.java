@@ -103,10 +103,7 @@ public class PetCommand extends BaseCommand {
 
     @Subcommand("slots")
     @CommandPermission("skypets.admin")
-    @CommandCompletion("@players")
-    public void PetsSlots(CommandSender sender, OfflinePlayer target) {
-        int slots = SkyCore.getPetsCollection().getPetSlots(target.getUniqueId());
-        Lang.sendCommandLang(sender, "pet-slots-info", "<target>", target.getName(), "<slots>", String.valueOf(slots));
+    public void slots(CommandSender sender) {
     }
 
     @Subcommand("slots add")
@@ -123,7 +120,7 @@ public class PetCommand extends BaseCommand {
         int newSlots = currentSlots + amount;
 
         SkyCore.getPetsCollection().setPetSlots(uuid, newSlots);
-        Lang.sendCommandLang(sender, "pet-slots-added", "<target>", target.getName(), "<amount>", String.valueOf(amount), "<total>", String.valueOf(newSlots));
+        Lang.sendCommandLang(sender, "pet-slots-added", "<player>", target.getName(), "<amount>", String.valueOf(amount), "<total>", String.valueOf(newSlots));
 
         if (target.isOnline()) {
             Lang.sendCommandLang(target.getPlayer(), "pet-slots-received", "<amount>", String.valueOf(amount), "<total>", String.valueOf(newSlots));
@@ -141,11 +138,7 @@ public class PetCommand extends BaseCommand {
 
         UUID uuid = target.getUniqueId();
         SkyCore.getPetsCollection().setPetSlots(uuid, slots);
-        Lang.sendCommandLang(sender, "pet-slots-set", "<target>", target.getName(), "<slots>", String.valueOf(slots));
-
-        if (target.isOnline()) {
-            Lang.sendCommandLang(target.getPlayer(), "pet-slots-set-player", "<slots>", String.valueOf(slots));
-        }
+        Lang.sendCommandLang(sender, "pet-slots-set", "<player>", target.getName(), "<amount>", String.valueOf(slots));
     }
 
     @Subcommand("slots reset")
@@ -153,11 +146,6 @@ public class PetCommand extends BaseCommand {
     @CommandCompletion("@players")
     public void PetsSlotsReset(CommandSender sender, OfflinePlayer target) {
         UUID uuid = target.getUniqueId();
-        SkyCore.getPetsCollection().setPetSlots(uuid, 2);
-        Lang.sendCommandLang(sender, "pet-slots-reset", "<target>", target.getName());
-
-        if (target.isOnline()) {
-            Lang.sendCommandLang(target.getPlayer(), "pet-slots-reset-player");
-        }
+        SkyCore.getPetsCollection().setPetSlots(uuid, 3);
     }
 }
