@@ -17,7 +17,7 @@ Current Progress: Done
 - [x] Improved how pets work (3/30/26)
 - [x] Added pet slots (3/30/26)
 - [x] Change the way arc's work with making a ring (3/30/26)
-- [x] Fix the display of how petsgui looks like
+- [x] Fix the display of how petsgui looks like (3/30/26)
 - [x] Fix lang file missing some sections (3/30/26)  
 
 # Powers
@@ -27,18 +27,19 @@ Current Progress: Done
 
 # Sales
 - [x] Setup mongodb database (3/30/26)
+- [x] Fixed items not returning when selling (3/30/26)
 
 # Analytics/Playtime
 - [x] Setup mongodb database (3/30/26)
 
 ## Misc 
 
-- [x] Data migration
-  - [x] Pets
-  - [x] Powers
-  - [x] Sales
-  - [x] Upgrades
-  - [x] Analytics
+- [x] Data migration (3/31/2026)
+  - [x] Pets (3/30/2026)
+  - [x] Powers (3/30/2026)
+  - [x] Sales (3/30/2026)
+  - [x] Upgrades (3/30/2026)
+  - [x] Analytics (3/31/2026)
 # Changelog
 This is meant for if we wanted for a more simplifed version of our todo list
 
