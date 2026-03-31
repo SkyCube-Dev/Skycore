@@ -1,17 +1,20 @@
 package dev.jackwith.skyCoreV2;
 
-import dev.jackwith.skyCoreV2.commands.PetCommand;
-import dev.jackwith.skyCoreV2.commands.UpgradesCommand;
-import dev.jackwith.skyCoreV2.database.Database;
-import dev.jackwith.skyCoreV2.database.PetsCollection;
-import dev.jackwith.skyCoreV2.database.UpgradesCollection;
+import dev.jackwith.skyCoreV2.commands.*;
+import dev.jackwith.skyCoreV2.database.*;
 import dev.jackwith.skyCoreV2.features.pets.Pet;
 import dev.jackwith.skyCoreV2.features.pets.PetModel;
 import dev.jackwith.skyCoreV2.features.pets.PetService;
 import dev.jackwith.skyCoreV2.features.pets.listeners.PetListener;
+import dev.jackwith.skyCoreV2.features.playtime.PlaytimeManager;
+import dev.jackwith.skyCoreV2.features.powers.PowerManager;
+import dev.jackwith.skyCoreV2.features.powers.listeners.PowerEffectsListener;
+import dev.jackwith.skyCoreV2.features.powers.listeners.PowersGUIListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.CropListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.IslandCreation;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.UpgradeListener;
+import dev.jackwith.skyCoreV2.hooks.expansions.BoxExpansion;
+import dev.jackwith.skyCoreV2.hooks.expansions.PlaytimeExpansion;
 import dev.jackwith.skyCoreV2.registeries.CommandRegistry;
 import dev.jackwith.skyCoreV2.utils.StackTrace;
 import net.milkbowl.vault.economy.Economy;
@@ -41,10 +44,15 @@ public final class SkyCore extends JavaPlugin {
 
     private static PetModel modelManager;
     private static PetService petService;
+    private static PlaytimeManager playtimeManager;
+    private static PowerManager powerManager;
 
     private static Database database;
     private static UpgradesCollection UpgradesCollection;
     private static PetsCollection petsCollection;
+    private static AnalyticsCollection analyticsCollection;
+    private static PowersCollection powersCollection;
+    private static SalesCollection salesCollection;
 
     public SkyCore() {
         instance = this;
@@ -66,14 +74,24 @@ public final class SkyCore extends JavaPlugin {
         database = new Database();
         UpgradesCollection = new UpgradesCollection();
         petsCollection = new PetsCollection();
+        analyticsCollection = new AnalyticsCollection();
+        powersCollection = new PowersCollection();
+        salesCollection = new SalesCollection();
 
         petService = new PetService(petsCollection);
         modelManager = new PetModel();
+        powerManager = new PowerManager();
+        playtimeManager = new PlaytimeManager(this);
+
+        playtimeManager.enable();
 
         CommandRegistry commandRegistry = new CommandRegistry(this);
         commandRegistry.registerAll(
                 new UpgradesCommand(),
-                new PetCommand(petService)
+                new PetCommand(petService),
+                new SellBoostCommand(),
+                new SellCommand(),
+                new PowersCommand()
         );
 
         commandRegistry.manager().getCommandCompletions().registerCompletion("players", c ->
@@ -84,7 +102,7 @@ public final class SkyCore extends JavaPlugin {
                 petService.getAllPets().stream().map(Pet::id).toList()
         );
 
-
+        powerManager.loadPowers();
 
         Bukkit.getScheduler().runTaskTimer(this, () -> {
             try {
@@ -100,13 +118,22 @@ public final class SkyCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CropListener(), this);
         getServer().getPluginManager().registerEvents(new UpgradeListener(this), this);
 
+        getServer().getPluginManager().registerEvents(new PowerEffectsListener(), this);
+        getServer().getPluginManager().registerEvents(new PowersGUIListener(this), this);
 
+        new PowerEffectsListener().startTask();
 
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
+            new BoxExpansion().register();
+            new PlaytimeExpansion().register();
+        }
     }
 
     @Override
     public void onDisable() {
         database.disconnect();
+
+        playtimeManager.disable();
     }
 
     private @NotNull File GetConfiguration(String fileName) {
@@ -147,11 +174,17 @@ public final class SkyCore extends JavaPlugin {
     public static FileConfiguration getPowersConfig() { return powers; }
 
     public static Database getDatabase() { return database; }
+
     public static UpgradesCollection getUpgradesCollection() { return UpgradesCollection; }
     public static PetsCollection getPetsCollection() { return petsCollection; }
+    public static AnalyticsCollection getAnalyticsCollection() { return analyticsCollection; }
+    public static PowersCollection getPowersCollection() { return powersCollection; }
+    public static SalesCollection getSalesCollection() { return salesCollection; }
 
     public static PetService getPetService() { return petService; }
     public static PetModel getModelManager() { return modelManager; }
+    public static PlaytimeManager getPlaytimeManager() { return playtimeManager; }
+    public static PowerManager getPowerManager() { return powerManager; }
 
     public static SkyCore getInstance() { return instance; }
 

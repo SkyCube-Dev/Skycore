@@ -20,7 +20,18 @@ In Progress
 - [x] Fix the display of how petsgui looks like
 - [x] Fix lang file missing some sections (3/30/26)  
 
-## Misc
+# Powers
+- [x] Setup mongodb database (3/30/26)
+- [x] Fixed missing task preventing powers from working (3/30/26)
+- [ ] Fix weird database delay when switching powers (3/30/26)
+
+# Sales
+- [ ] Setup mongodb database (3/30/26)
+
+# Analytics/Playtime
+- [x] Setup mongodb database (3/30/26)
+
+## Misc 
 
 - [ ] Migrate dbs (waiting beacuse i want all the dbs to work before migrating)
 
@@ -31,3 +42,4 @@ This is meant for if we wanted for a more simplifed version of our todo list
 - Fixed formats with how time is displayed in upgrades
 - Added VIP upgrades
 - Added Pet slots
+- Fixed Certain powers not working as they should
