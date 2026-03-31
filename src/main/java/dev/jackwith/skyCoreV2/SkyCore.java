@@ -7,9 +7,11 @@ import dev.jackwith.skyCoreV2.features.pets.PetModel;
 import dev.jackwith.skyCoreV2.features.pets.PetService;
 import dev.jackwith.skyCoreV2.features.pets.listeners.PetListener;
 import dev.jackwith.skyCoreV2.features.playtime.PlaytimeManager;
+import dev.jackwith.skyCoreV2.features.playtime.listeners.PlaytimeListener;
 import dev.jackwith.skyCoreV2.features.powers.PowerManager;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowerEffectsListener;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowersGUIListener;
+import dev.jackwith.skyCoreV2.features.sales.listener.SellListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.CropListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.IslandCreation;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.UpgradeListener;
@@ -120,6 +122,9 @@ public final class SkyCore extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PowerEffectsListener(), this);
         getServer().getPluginManager().registerEvents(new PowersGUIListener(this), this);
+
+//        getServer().getPluginManager().registerEvents(new PlaytimeListener(this, playtimeManager.getCache()), this);
+        getServer().getPluginManager().registerEvents(new SellListener(), this);
 
         new PowerEffectsListener().startTask();
 

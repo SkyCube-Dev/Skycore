@@ -69,7 +69,12 @@ public class UpgradesCollection {
 
     public long getUpgradingUntil(String uuid) {
         Document doc = getPlayerData(uuid);
-        return doc != null ? doc.getLong("upgrading_until") : 0L;
+        if (doc == null) return 0L;
+
+        Object val = doc.get("upgrading_until");
+        if (val instanceof Long l) return l;
+        if (val instanceof Integer i) return i.longValue();
+        return 0L;
     }
 
     public void updateDocument(String uuid, int level, long timestamp) {

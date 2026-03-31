@@ -75,7 +75,7 @@ public class PowersGUIListener implements Listener {
         boolean owned = db.isPowerOwned(uuid, powerKey);
         boolean freeUsed = db.hasUsedFreePower(uuid);
 
-        String rawName = plugin.getPowersConfig().getString("powers." + powerKey + ".name", powerKey);
+        String rawName = SkyCore.getPowersConfig().getString("powers." + powerKey + ".name", powerKey);
         Component displayName = MINI.deserialize(rawName);
 
         if (powerKey.equalsIgnoreCase(current)) {

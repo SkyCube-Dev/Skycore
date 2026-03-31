@@ -67,6 +67,9 @@ public class PowerEffectsListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
         SkyCore.getPowersCollection().createPlayer(p.getUniqueId());
+
+        SkyCore.getPowersCollection().loadPlayer(p.getUniqueId());
+
         PowerManager.applyPower(p, SkyCore.getPowersCollection().getPower(p.getUniqueId()));
     }
 
@@ -100,6 +103,8 @@ public class PowerEffectsListener implements Listener {
     public void onQuit(PlayerQuitEvent e) {
         UUID id = e.getPlayer().getUniqueId();
         lastPlatform.remove(id);
+
+        SkyCore.getPowersCollection().unloadPlayer(e.getPlayer().getUniqueId());
     }
 
     @EventHandler

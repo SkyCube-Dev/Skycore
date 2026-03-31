@@ -28,7 +28,13 @@ public class SalesCollection {
 
     public double getPlayerSellBoost(UUID uuid) {
         Document doc = multipliers.find(Filters.eq("uuid", uuid.toString())).first();
-        return doc != null ? doc.getDouble("multiplier") : 1.0;
+        if (doc == null) return 1.0;
+
+        Object val = doc.get("multiplier");
+        if (val instanceof Number) {
+            return ((Number) val).doubleValue();
+        }
+        return 1.0;
     }
 
     public void setPlayerSellBoost(UUID uuid, double boost) {

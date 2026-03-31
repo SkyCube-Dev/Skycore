@@ -8,14 +8,15 @@ import com.mongodb.client.model.UpdateOptions;
 import dev.jackwith.skyCoreV2.SkyCore;
 import dev.jackwith.skyCoreV2.database.data.PlayerPowerData;
 import org.bson.Document;
-import org.bukkit.Bukkit;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PowersCollection {
 
     private final MongoCollection<Document> collection;
+    private final ConcurrentHashMap<UUID, PlayerPowerData> cache = new ConcurrentHashMap<>();
 
     public PowersCollection() {
         MongoDatabase db = SkyCore.getDatabase().getDatabase();
@@ -23,46 +24,59 @@ public class PowersCollection {
         this.collection.createIndex(new Document("uuid", 1), new IndexOptions().unique(true));
     }
 
-    private Document getPlayer(UUID uuid) {
-        return collection.find(Filters.eq("uuid", uuid.toString())).first();
+    public void loadPlayer(UUID uuid) {
+        CompletableFuture.runAsync(() -> {
+            Document doc = collection.find(Filters.eq("uuid", uuid.toString())).first();
+            String current  = doc != null ? doc.getString("current_power")  : "none";
+            String unlocked = doc != null ? doc.getString("unlocked_power") : "none";
+            cache.put(uuid, new PlayerPowerData(uuid, current, unlocked, !"none".equalsIgnoreCase(unlocked)));
+        });
     }
 
-    public void createPlayer(UUID uuid) {
-        collection.updateOne(
-                Filters.eq("uuid", uuid.toString()),
-                new Document("$setOnInsert", new Document("uuid", uuid.toString())
-                        .append("current_power", "none")
-                        .append("unlocked_power", "none")),
-                new UpdateOptions().upsert(true)
-        );
+    public void unloadPlayer(UUID uuid) {
+        cache.remove(uuid);
     }
 
     public String getPower(UUID uuid) {
-        Document doc = getPlayer(uuid);
-        return doc != null ? doc.getString("current_power") : "none";
+        PlayerPowerData data = cache.get(uuid);
+        return data != null ? data.getPower() : "none";
     }
 
     public String getUnlockedPower(UUID uuid) {
-        Document doc = getPlayer(uuid);
-        return doc != null ? doc.getString("unlocked_power") : "none";
+        PlayerPowerData data = cache.get(uuid);
+        return data != null ? data.getUnlockedPower() : "none";
     }
 
     public boolean hasUsedFreePower(UUID uuid) {
-        return !"none".equalsIgnoreCase(getUnlockedPower(uuid));
+        PlayerPowerData data = cache.get(uuid);
+        return data != null && data.hasUsedFreePower();
     }
 
     public boolean isPowerOwned(UUID uuid, String key) {
-        return getUnlockedPower(uuid).equalsIgnoreCase(key);
+        return key.equalsIgnoreCase(getUnlockedPower(uuid));
     }
 
     public PlayerPowerData getPlayerPower(UUID uuid) {
-        Document doc = getPlayer(uuid);
-        String current  = doc != null ? doc.getString("current_power")  : "none";
-        String unlocked = doc != null ? doc.getString("unlocked_power") : "none";
-        return new PlayerPowerData(uuid, current, unlocked, !"none".equalsIgnoreCase(unlocked));
+        return cache.getOrDefault(uuid, new PlayerPowerData(uuid, "none", "none", false));
+    }
+
+    public void createPlayer(UUID uuid) {
+        cache.computeIfAbsent(uuid, k -> new PlayerPowerData(k, "none", "none", false));
+        CompletableFuture.runAsync(() ->
+                collection.updateOne(
+                        Filters.eq("uuid", uuid.toString()),
+                        new Document("$setOnInsert", new Document("uuid", uuid.toString())
+                                .append("current_power", "none")
+                                .append("unlocked_power", "none")),
+                        new UpdateOptions().upsert(true)
+                )
+        );
     }
 
     public void setPower(UUID uuid, String power) {
+        PlayerPowerData data = cache.get(uuid);
+        if (data != null) data.setPower(power);
+
         CompletableFuture.runAsync(() ->
                 collection.updateOne(
                         Filters.eq("uuid", uuid.toString()),
@@ -73,6 +87,12 @@ public class PowersCollection {
     }
 
     public void setPowerOwned(UUID uuid, String power) {
+        PlayerPowerData data = cache.get(uuid);
+        if (data != null) {
+            data.setUnlockedPower(power);
+            data.setUsedFreePower(true);
+        }
+
         CompletableFuture.runAsync(() ->
                 collection.updateOne(
                         Filters.eq("uuid", uuid.toString()),

@@ -23,18 +23,22 @@ In Progress
 # Powers
 - [x] Setup mongodb database (3/30/26)
 - [x] Fixed missing task preventing powers from working (3/30/26)
-- [ ] Fix weird database delay when switching powers (3/30/26)
+- [x] Fix weird database delay when switching powers (3/30/26)
 
 # Sales
-- [ ] Setup mongodb database (3/30/26)
+- [x] Setup mongodb database (3/30/26)
 
 # Analytics/Playtime
 - [x] Setup mongodb database (3/30/26)
 
 ## Misc 
 
-- [ ] Migrate dbs (waiting beacuse i want all the dbs to work before migrating)
-
+- [x] Data migration
+  - [x] Pets
+  - [x] Powers
+  - [x] Sales
+  - [x] Upgrades
+  - [x] Analytics
 # Changelog
 This is meant for if we wanted for a more simplifed version of our todo list
 
