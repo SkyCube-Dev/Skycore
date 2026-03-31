@@ -1,9 +1,9 @@
 # SkycoreV2
 This version was already reworked, however i want to bring some changes so that the plugin will be easier to work with for the future of skycube
 
-Current Build: SkyCube-Dev
+Current Build: SkyCube-dev
 
-In Progress
+Current Progress: Done
 
 # Upgrades
 - [x] Setup mongodb database (3/29/26)
