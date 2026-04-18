@@ -17,14 +17,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class CropListener implements Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void BlockGrow(BlockGrowEvent e) {
-        if (CheckUpgrading(e.getBlock().getLocation())) {
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                e.setCancelled(true);
-            }
-        }
-    }
+//    @EventHandler(priority = EventPriority.LOWEST)
+//    public void BlockGrow(BlockGrowEvent e) {
+//        if (CheckUpgrading(e.getBlock().getLocation())) {
+//            if (ThreadLocalRandom.current().nextBoolean()) {
+//                e.setCancelled(true);
+//            }
+//        }
+//    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void SpawnerSpawn(SpawnerSpawnEvent e) {
