@@ -41,6 +41,28 @@ public class SaleService {
         public List<ItemStack> getUnsoldItems()     { return unsoldItems; }  // NEW
     }
 
+    private double getMaxPrestigeBoost(Player player) {
+        double max = 0;
+
+        if (player.hasPermission("prestige.level.6")) {
+            max = Math.max(max, 50);
+        }
+        if (player.hasPermission("prestige.level.5")) {
+            max = Math.max(max, 40);
+        }
+        if (player.hasPermission("prestige.level.4")) {
+            max = Math.max(max, 30);
+        }
+        if (player.hasPermission("prestige.level.3")) {
+            max = Math.max(max, 20);
+        }
+        if (player.hasPermission("prestige.level.2")) {
+            max = Math.max(max, 10);
+        }
+
+        return max;
+    }
+
     public SaleResult processInventory(Player player, ItemStack[] contents) {
         if (!Bukkit.getPluginManager().isPluginEnabled("ShopGUIPlus")) {
             return new SaleResult(0, 0, 0, new LinkedHashMap<>(), List.of());
@@ -48,7 +70,10 @@ public class SaleService {
 
         UUID uuid = player.getUniqueId();
 
-        double playerBoostPercent = (SkyCore.getSalesCollection().getPlayerSellBoost(uuid) - 1.0) * 100.0;
+        double baseBoostPercent = (SkyCore.getSalesCollection().getPlayerSellBoost(uuid) - 1.0) * 100.0;
+        double prestigeBoost    = getMaxPrestigeBoost(player);
+        double playerBoostPercent = baseBoostPercent + prestigeBoost;
+
         double petBoostPercent    = calculatePetBoost(uuid);
         double totalBoostPercent  = playerBoostPercent + petBoostPercent;
         double multiplier         = 1.0 + (totalBoostPercent / 100.0);
