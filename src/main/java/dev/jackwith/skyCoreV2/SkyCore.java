@@ -12,10 +12,6 @@ import dev.jackwith.skyCoreV2.features.powers.PowerManager;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowerEffectsListener;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowersGUIListener;
 import dev.jackwith.skyCoreV2.features.sales.listener.SellListener;
-import dev.jackwith.skyCoreV2.features.upgrades.listeners.CropListener;
-import dev.jackwith.skyCoreV2.features.upgrades.listeners.IslandCreation;
-import dev.jackwith.skyCoreV2.features.upgrades.listeners.UpgradeListener;
-import dev.jackwith.skyCoreV2.hooks.expansions.BoxExpansion;
 import dev.jackwith.skyCoreV2.hooks.expansions.PlaytimeExpansion;
 import dev.jackwith.skyCoreV2.registeries.CommandRegistry;
 import dev.jackwith.skyCoreV2.utils.StackTrace;
@@ -50,7 +46,6 @@ public final class SkyCore extends JavaPlugin {
     private static PowerManager powerManager;
 
     private static Database database;
-    private static UpgradesCollection UpgradesCollection;
     private static PetsCollection petsCollection;
     private static AnalyticsCollection analyticsCollection;
     private static PowersCollection powersCollection;
@@ -74,7 +69,6 @@ public final class SkyCore extends JavaPlugin {
         loadConfigs();
 
         database = new Database();
-        UpgradesCollection = new UpgradesCollection();
         petsCollection = new PetsCollection();
         analyticsCollection = new AnalyticsCollection();
         powersCollection = new PowersCollection();
@@ -89,7 +83,6 @@ public final class SkyCore extends JavaPlugin {
 
         CommandRegistry commandRegistry = new CommandRegistry(this);
         commandRegistry.registerAll(
-                new UpgradesCommand(),
                 new PetCommand(petService),
                 new SellBoostCommand(),
                 new SellCommand(),
@@ -116,20 +109,15 @@ public final class SkyCore extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PetListener(petService), this);
 
-        getServer().getPluginManager().registerEvents(new IslandCreation(), this);
-        getServer().getPluginManager().registerEvents(new CropListener(), this);
-        getServer().getPluginManager().registerEvents(new UpgradeListener(this), this);
-
         getServer().getPluginManager().registerEvents(new PowerEffectsListener(), this);
         getServer().getPluginManager().registerEvents(new PowersGUIListener(this), this);
 
-//        getServer().getPluginManager().registerEvents(new PlaytimeListener(this, playtimeManager.getCache()), this);
+        getServer().getPluginManager().registerEvents(new PlaytimeListener(this, playtimeManager.getCache()), this);
         getServer().getPluginManager().registerEvents(new SellListener(), this);
 
         new PowerEffectsListener().startTask();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new BoxExpansion().register();
             new PlaytimeExpansion().register();
         }
     }
@@ -180,7 +168,6 @@ public final class SkyCore extends JavaPlugin {
 
     public static Database getDatabase() { return database; }
 
-    public static UpgradesCollection getUpgradesCollection() { return UpgradesCollection; }
     public static PetsCollection getPetsCollection() { return petsCollection; }
     public static AnalyticsCollection getAnalyticsCollection() { return analyticsCollection; }
     public static PowersCollection getPowersCollection() { return powersCollection; }
