@@ -33,7 +33,6 @@ public class IslandCreation implements Listener {
         BentoBoxHook.setIslandSpawn(event.getPlayerUUID());
     }
 
-    // Note: This is only for players that have already joined and has island data.
     @EventHandler
     public static void setupBoxJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
@@ -41,27 +40,26 @@ public class IslandCreation implements Listener {
 
         UpgradesCollection Uc = SkyCore.getUpgradesCollection();
 
-        Uc.createPlayer(uuid.toString());
-        int currentLevel = Uc.getLevel(uuid.toString());
-
         Optional<Island> islandOpt = Optional.ofNullable(
                 BentoBox.getInstance()
                         .getIslands()
                         .getIsland(Objects.requireNonNull(Bukkit.getWorld("boxed_world")), uuid)
         );
 
-        if (islandOpt.isPresent()) {
-            UUID ownerUuid = islandOpt.get().getOwner();
+        if (islandOpt.isEmpty()) return;
 
-            ConfigurationSection levelData = SkyCore
-                    .getUpgradesConfig()
-                    .getConfigurationSection("upgrades." + currentLevel);
+        UUID ownerUuid = islandOpt.get().getOwner();
+        if (ownerUuid == null) return;
 
-            if (levelData != null) {
-                assert ownerUuid != null;
-                BentoBoxHook.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
-            }
+        Uc.createPlayer(ownerUuid.toString());
+        int ownerLevel = Uc.getLevel(ownerUuid.toString());
+
+        ConfigurationSection levelData = SkyCore
+                .getUpgradesConfig()
+                .getConfigurationSection("upgrades." + ownerLevel);
+
+        if (levelData != null) {
+            BentoBoxHook.updateIslandSize(ownerUuid.toString(), levelData.getInt("size"), player);
         }
     }
-
 }
