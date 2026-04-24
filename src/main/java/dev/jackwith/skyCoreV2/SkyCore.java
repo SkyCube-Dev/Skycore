@@ -12,6 +12,8 @@ import dev.jackwith.skyCoreV2.features.powers.PowerManager;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowerEffectsListener;
 import dev.jackwith.skyCoreV2.features.powers.listeners.PowersGUIListener;
 import dev.jackwith.skyCoreV2.features.sales.listener.SellListener;
+import dev.jackwith.skyCoreV2.features.vip.VIPManager;
+import dev.jackwith.skyCoreV2.features.vip.listeners.VIPJoinListener;
 import dev.jackwith.skyCoreV2.hooks.expansions.PlaytimeExpansion;
 import dev.jackwith.skyCoreV2.registeries.CommandRegistry;
 import dev.jackwith.skyCoreV2.utils.StackTrace;
@@ -44,6 +46,8 @@ public final class SkyCore extends JavaPlugin {
     private static PetService petService;
     private static PlaytimeManager playtimeManager;
     private static PowerManager powerManager;
+    private static VIPManager vipManager;
+
 
     private static Database database;
     private static PetsCollection petsCollection;
@@ -115,10 +119,19 @@ public final class SkyCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlaytimeListener(this, playtimeManager.getCache()), this);
         getServer().getPluginManager().registerEvents(new SellListener(), this);
 
+        getServer().getPluginManager().registerEvents(new VIPJoinListener(vipManager), this);
+
         new PowerEffectsListener().startTask();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new PlaytimeExpansion().register();
+        }
+
+        if (vipManager.isDatabaseLoaded()) {
+            getLogger().info("VIP subscription system enabled with " + vipManager.getActiveCount() + " active subscriptions");
+        } else {
+            getLogger().warning("VIP subscription system loaded but no data.json found");
+            getLogger().warning("Place data.json in plugin folder and run /vip reload");
         }
     }
 
@@ -177,6 +190,8 @@ public final class SkyCore extends JavaPlugin {
     public static PetModel getModelManager() { return modelManager; }
     public static PlaytimeManager getPlaytimeManager() { return playtimeManager; }
     public static PowerManager getPowerManager() { return powerManager; }
+
+    public static VIPManager getVipManager() { return vipManager; }
 
     public static SkyCore getInstance() { return instance; }
 
