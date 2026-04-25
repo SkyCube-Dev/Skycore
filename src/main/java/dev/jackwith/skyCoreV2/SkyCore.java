@@ -15,6 +15,8 @@ import dev.jackwith.skyCoreV2.features.sales.listener.SellListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.CropListener;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.IslandCreation;
 import dev.jackwith.skyCoreV2.features.upgrades.listeners.UpgradeListener;
+import dev.jackwith.skyCoreV2.features.vip.VIPManager;
+import dev.jackwith.skyCoreV2.features.vip.listeners.VIPJoinListener;
 import dev.jackwith.skyCoreV2.hooks.expansions.BoxExpansion;
 import dev.jackwith.skyCoreV2.hooks.expansions.PlaytimeExpansion;
 import dev.jackwith.skyCoreV2.registeries.CommandRegistry;
@@ -48,6 +50,7 @@ public final class SkyCore extends JavaPlugin {
     private static PetService petService;
     private static PlaytimeManager playtimeManager;
     private static PowerManager powerManager;
+    private static VIPManager vipManager;
 
     private static Database database;
     private static UpgradesCollection UpgradesCollection;
@@ -80,6 +83,8 @@ public final class SkyCore extends JavaPlugin {
         powersCollection = new PowersCollection();
         salesCollection = new SalesCollection();
 
+        vipManager = new VIPManager(this);
+
         petService = new PetService(petsCollection);
         modelManager = new PetModel();
         powerManager = new PowerManager();
@@ -103,6 +108,8 @@ public final class SkyCore extends JavaPlugin {
         commandRegistry.manager().getCommandCompletions().registerCompletion("pets", c ->
                 petService.getAllPets().stream().map(Pet::id).toList()
         );
+
+        getServer().getPluginManager().registerEvents(new VIPJoinListener(vipManager), this);
 
         powerManager.loadPowers();
 
