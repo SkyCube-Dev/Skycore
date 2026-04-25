@@ -83,6 +83,10 @@ public final class SkyCore extends JavaPlugin {
         powerManager = new PowerManager();
         playtimeManager = new PlaytimeManager(this);
 
+        vipManager = new VIPManager(this);
+
+        vipManager.loadDatabase();
+
         playtimeManager.enable();
 
         CommandRegistry commandRegistry = new CommandRegistry(this);
